@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Elite University | Excellence in Education</title>
+    <!-- Preconnect for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Bootstrap 5.3 + Icons + Font -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Modern light theme variables */
+        :root {
+            --green-deep: #047857;
+            --green-primary: #10b981;
+            --green-soft: #34d399;
+            --green-bg-light: #ecfdf5;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-900: #0f172a;
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+        }
+
+        /* container responsive enhancements */
+        .container {
+            width: 100%;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 640px) {
+            .container { max-width: 640px; }
+        }
+        @media (min-width: 768px) {
+            .container { max-width: 768px; padding-left: 1.5rem; padding-right: 1.5rem; }
+        }
+        @media (min-width: 1024px) {
+            .container { max-width: 1024px; }
+        }
+        @media (min-width: 1280px) {
+            .container { max-width: 1200px; }
+        }
+
+        /* Typography refined */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--gray-900);
+        }
+
+        p {
+            color: var(--gray-600);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Navbar - Clean & Sticky */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(0px);
+            padding: 0.85rem 0;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+            transition: all 0.2s;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--gray-900) !important;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .navbar-brand i {
+            color: var(--green-primary);
+            font-size: 1.6rem;
+        }
+        .navbar-toggler {
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 0.5rem 0.75rem;
+        }
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+            outline: none;
+        }
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--gray-600) !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            margin: 0 2px;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--green-primary) !important;
+            background: rgba(16, 185, 129, 0.08);
+        }
+        
+        /* FIXED: Mobile dropdown styling - proper touch support */
+        @media (max-width: 991.98px) {
+            .dropdown-menu {
+                border: none;
+                background: transparent;
+                box-shadow: none;
+                padding-left: 1.25rem;
+                margin-top: 0;
+                position: static !important;
+                transform: none !important;
+                width: 100%;
+            }
+            .dropdown-menu.show {
+                display: block;
+                background: rgba(241, 245, 249, 0.5);
+                border-radius: 12px;
+                margin-top: 0.25rem;
+            }
+            .dropdown-item {
+                color: var(--gray-700);
+                padding: 0.6rem 1rem 0.6rem 2rem;
+                font-size: 0.85rem;
+            }
+            .dropdown-item i {
+                width: 1.5rem;
+                margin-right: 0.5rem;
+            }
+            .dropdown-toggle::after {
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .nav-item.dropdown {
+                position: relative;
+            }
+        }
+        
+        /* Desktop dropdown stays normal */
+        @media (min-width: 992px) {
+            .dropdown-menu {
+                border: 1px solid var(--gray-200);
+                border-radius: 16px;
+                padding: 0.5rem 0;
+                margin-top: 0.5rem;
+                box-shadow: var(--shadow-md);
+                background: var(--white);
+                position: absolute;
+            }
+        }
+        
+        .dropdown-menu {
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            box-shadow: var(--shadow-md);
+            background: var(--white);
+        }
+        .dropdown-item {
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.6rem 1.5rem;
+            color: var(--gray-700);
+            transition: all 0.2s;
+        }
+        .dropdown-item:hover {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--green-primary);
+        }
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        /* Hero Section - modern soft gradient */
+        .hero-section {
+            background: linear-gradient(125deg, #ecfdf5 0%, #d1fae5 45%, #ffffff 100%);
+            padding: 4rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+        @media (min-width: 768px) {
+            .hero-section { padding: 6rem 1rem 5rem; }
+        }
+        .hero-section h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #064e3b, #059669);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        @media (min-width: 768px) {
+            .hero-section h1 { font-size: 3.4rem; }
+        }
+        .hero-section p {
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: var(--gray-600);
+        }
+        @media (min-width: 768px) {
+            .hero-section p { font-size: 1.15rem; }
+        }
+        .btn-hero, .btn-hero-outline {
+            display: inline-block;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.25s;
+            margin: 0.4rem;
+            text-decoration: none;
+        }
+        .btn-hero {
+            background: var(--green-primary);
+            color: white;
+            box-shadow: var(--shadow-sm);
+            border: none;
+        }
+        .btn-hero:hover {
+            background: var(--green-deep);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-hero-outline {
+            background: transparent;
+            border: 1.5px solid var(--green-primary);
+            color: var(--green-primary);
+        }
+        .btn-hero-outline:hover {
+            background: rgba(16, 185, 129, 0.08);
+            transform: translateY(-2px);
+            border-color: var(--green-deep);
+            color: var(--green-deep);
+        }
+        @media (max-width: 520px) {
+            .btn-hero, .btn-hero-outline {
+                display: block;
+                width: 80%;
+                margin: 0.6rem auto;
+                text-align: center;
+            }
+        }
+
+        /* Stats section - overlapping cards */
+        .stats-section {
+            margin-top: -2.5rem;
+            position: relative;
+            z-index: 5;
+            padding: 0 1rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.25rem;
+        }
+        .stat-card {
+            background: var(--white);
+            border-radius: 1.5rem;
+            padding: 1.5rem 0.8rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            transition: all 0.25s;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--green-soft);
+            box-shadow: var(--shadow-xl);
+        }
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--green-primary);
+            margin-bottom: 0.8rem;
+        }
+        .stat-card h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0.5rem 0 0.2rem;
+            color: var(--gray-900);
+        }
+        .stat-card p {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--gray-500);
+            margin: 0;
+        }
+        @media (max-width: 480px) {
+            .stats-grid { gap: 0.9rem; }
+            .stat-card { padding: 1rem 0.5rem; }
+            .stat-card h3 { font-size: 1.4rem; }
+            .stat-card i { font-size: 1.6rem; }
+        }
+
+        /* General Cards */
+        .card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 1.5rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-xs);
+        }
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--gray-300);
+        }
+        .card-header {
+            background: var(--white);
+            padding: 1.25rem 1.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--green-primary);
+            color: var(--gray-900);
+        }
+        .card-header i {
+            color: var(--green-primary);
+            margin-right: 0.7rem;
+            font-size: 1.2rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        @media (max-width: 576px) {
+            .card-header { padding: 1rem 1.25rem; font-size: 1rem; }
+            .card-body { padding: 1.25rem; }
+        }
+
+        /* Course Grid responsive */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+        .course-item {
+            background: var(--gray-50);
+            border-radius: 1.25rem;
+            padding: 1.6rem 1rem;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s;
+        }
+        .course-item:hover {
+            background: var(--white);
+            transform: translateY(-3px);
+            border-color: var(--green-primary);
+            box-shadow: var(--shadow-md);
+        }
+        .course-item i {
+            font-size: 2.2rem;
+            color: var(--green-primary);
+            margin-bottom: 1rem;
+        }
+        .course-item h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+        .course-item p {
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+        .course-item small {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--green-primary);
+            background: rgba(16,185,129,0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* Notices */
+        .notice-item {
+            background: var(--gray-50);
+            border-left: 4px solid var(--green-primary);
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
+            border-radius: 1rem;
+            transition: all 0.2s;
+        }
+        .notice-item:hover {
+            background: var(--white);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
+        .notice-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 0.5rem;
+            color: var(--gray-800);
+        }
+        .notice-title i {
+            color: var(--green-primary);
+        }
+        .badge-notice {
+            background: var(--green-primary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+        .notice-date {
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            margin-top: 0.6rem;
+        }
+
+        /* Footer modern dark */
+        .footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        .footer h5 {
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .footer a:hover {
+            color: var(--green-soft);
+            padding-left: 4px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        .social-icons a:hover {
+            background: var(--green-primary);
+            transform: translateY(-3px);
+            color: white;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.75rem;
+        }
+        .form-control-sm-custom {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 0.55rem 1rem;
+            font-size: 0.85rem;
+            color: white;
+        }
+        .btn-subscribe {
+            background: var(--green-primary);
+            border: none;
+            border-radius: 12px;
+            padding: 0.55rem 1.2rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        @media (max-width: 768px) {
+            .footer .row > div { margin-bottom: 2rem; }
+        }
+
+        /* form controls */
+        .form-control {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 0.65rem 1rem;
+            font-size: 0.85rem;
+        }
+        .form-control:focus {
+            border-color: var(--green-primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        /* scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--green-primary);
+            border-radius: 8px;
+        }
+
+        /* animations */
+        .animate-once {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.5s ease;
+        }
+        .animate-once.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation with FIXED dropdown for mobile -->
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Elite University</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/courses"><i class="fas fa-book"></i> Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admission"><i class="fas fa-arrow-right"></i> Admission</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                <!-- FIXED: Login Dropdown with proper data-bs attributes and manual mobile handling -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                        <li><a class="dropdown-item" href="/admin-login"><i class="fas fa-user-shield me-2"></i> Admin Login</a></li>
+                        <li><a class="dropdown-item" href="/teacher-login"><i class="fas fa-chalkboard-user me-2"></i> Teacher Login</a></li>
+                        <li><a class="dropdown-item" href="/student-login"><i class="fas fa-user-graduate me-2"></i> Student Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <h1>Welcome to Elite University</h1>
+        <p>Shaping future leaders through excellence in education, research, and innovation since 1995.</p>
+        <div>
+            <a href="/admission" class="btn-hero"><i class="fas fa-arrow-right"></i> Apply Now</a>
+            <a href="/courses" class="btn-hero-outline"><i class="fas fa-book-open"></i> Explore Courses</a>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<div class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card animate-once"><i class="fas fa-users"></i><h3>4,250+</h3><p>Total Students</p></div>
+            <div class="stat-card animate-once"><i class="fas fa-chalkboard-user"></i><h3>245+</h3><p>Expert Faculty</p></div>
+            <div class="stat-card animate-once"><i class="fas fa-book"></i><h3>48+</h3><p>Courses Offered</p></div>
+            <div class="stat-card animate-once"><i class="fas fa-briefcase"></i><h3>95%</h3><p>Placement Rate</p></div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Student Distribution by Course -->
+    <div class="card animate-once">
+        <div class="card-header"><i class="fas fa-chart-pie"></i> Student Distribution by Course</div>
+        <div class="card-body">
+            <div class="stats-grid">
+                <div class="stat-card"><i class="fas fa-laptop-code"></i><h3>2,180</h3><p>B.Tech Students</p></div>
+                <div class="stat-card"><i class="fas fa-chart-line"></i><h3>1,250</h3><p>MBA Students</p></div>
+                <div class="stat-card"><i class="fas fa-code"></i><h3>820</h3><p>BCA / MCA</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popular Courses -->
+    <div class="card animate-once">
+        <div class="card-header"><i class="fas fa-star"></i> Our Popular Courses</div>
+        <div class="card-body">
+            <div class="course-grid">
+                <div class="course-item"><i class="fas fa-microchip"></i><h4>B.Tech</h4><p>Computer Science • AI & ML • Data Science</p><small>4 Years | Full Time</small></div>
+                <div class="course-item"><i class="fas fa-chart-line"></i><h4>MBA</h4><p>Marketing • Finance • HR • International Business</p><small>2 Years | Full Time</small></div>
+                <div class="course-item"><i class="fas fa-code"></i><h4>BCA/MCA</h4><p>Web Development • Mobile Apps • Cyber Security</p><small>3/2 Years | Full Time</small></div>
+                <div class="course-item"><i class="fas fa-calculator"></i><h4>B.Com (Hons)</h4><p>Accounting • Finance • Taxation</p><small>3 Years | Full Time</small></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Latest News & Notices -->
+    <div class="card animate-once">
+        <div class="card-header"><i class="fas fa-newspaper"></i> Latest News & Announcements</div>
+        <div class="card-body">
+            <div class="notice-item">
+                <div class="notice-title"><i class="fas fa-bullhorn"></i> International Conference 2026 <span class="badge-notice"><i class="fas fa-calendar"></i> Event</span></div>
+                <p>Join the Global Tech Summit on April 15-17, 2026. Registration open for students and faculty.</p>
+                <div class="notice-date"><i class="fas fa-clock"></i> Published on: March 10, 2026</div>
+            </div>
+            <div class="notice-item">
+                <div class="notice-title"><i class="fas fa-info-circle"></i> Odd Semester Exam Schedule <span class="badge-notice"><i class="fas fa-edit"></i> Notice</span></div>
+                <p>Even semester practical exams from 20th March 2026. Download timetable from student portal.</p>
+                <div class="notice-date"><i class="fas fa-clock"></i> Published on: March 5, 2026</div>
+            </div>
+            <div class="notice-item">
+                <div class="notice-title"><i class="fas fa-trophy"></i> Merit Scholarship 2026 <span class="badge-notice"><i class="fas fa-graduation-cap"></i> Scholarship</span></div>
+                <p>Applications invited for merit-cum-means scholarship. Last date: 31st March, 2026.</p>
+                <div class="notice-date"><i class="fas fa-clock"></i> Published on: February 28, 2026</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="card animate-once">
+        <div class="card-header"><i class="fas fa-question-circle"></i> Why Choose Elite University?</div>
+        <div class="card-body">
+            <div class="stats-grid">
+                <div class="stat-card"><i class="fas fa-globe"></i><h3>Global</h3><p>International Collaborations</p></div>
+                <div class="stat-card"><i class="fas fa-flask"></i><h3>Research</h3><p>Advanced Research Labs</p></div>
+                <div class="stat-card"><i class="fas fa-handshake"></i><h3>Placements</h3><p>100+ Recruiting Partners</p></div>
+                <div class="stat-card"><i class="fas fa-trophy"></i><h3>Awards</h3><p>Nationally Recognized</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-12 col-md-4">
+                <h5><i class="fas fa-university me-2"></i> Elite University</h5>
+                <p>123 Education Street, Knowledge City<br>PIN: 110001, New Delhi, India</p>
+                <p><i class="fas fa-phone-alt me-2"></i> +91 1234567890<br><i class="fas fa-envelope me-2"></i> info@eliteuniversity.edu</p>
+            </div>
+            <div class="col-6 col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="/about"><i class="fas fa-chevron-right fa-xs me-1"></i> About Us</a></li>
+                    <li class="mb-2"><a href="/courses"><i class="fas fa-chevron-right fa-xs me-1"></i> Courses</a></li>
+                    <li class="mb-2"><a href="/admission"><i class="fas fa-chevron-right fa-xs me-1"></i> Admission 2026</a></li>
+                    <li class="mb-2"><a href="/contact"><i class="fas fa-chevron-right fa-xs me-1"></i> Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-4">
+                <h5>Follow Us</h5>
+                <div class="social-icons mb-3">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                <h5 class="mt-2">Newsletter</h5>
+                <div class="d-flex flex-wrap gap-2 mt-2">
+                    <input type="email" class="form-control form-control-sm-custom" style="flex:1; min-width: 140px;" placeholder="Your Email">
+                    <button class="btn btn-subscribe" type="button">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Elite University. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #10b981;"></i> for Excellence</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    (function() {
+        // Intersection Observer for fade-in-up animation
+        const elements = document.querySelectorAll('.animate-once');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -10px 0px" });
+        
+        elements.forEach(el => observer.observe(el));
+        
+        // Manual trigger for already visible items
+        if (elements.length) {
+            window.addEventListener('load', () => {
+                elements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 80) {
+                        el.classList.add('revealed');
+                        observer.unobserve(el);
+                    }
+                });
+            });
+        }
+        
+        // FIXED: Mobile dropdown handling - prevents navbar collapse when clicking dropdown toggle
+        const dropdownToggle = document.querySelector('#loginDropdown');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        
+        if (dropdownToggle) {
+            dropdownToggle.addEventListener('click', function(e) {
+                // On mobile, prevent the navbar from collapsing when toggling dropdown
+                if (window.innerWidth < 992) {
+                    e.stopPropagation();
+                    // Bootstrap handles the dropdown toggle automatically
+                    // This just prevents the event from bubbling to the navbar collapse
+                }
+            });
+        }
+        
+        // Close mobile menu and dropdowns when clicking on dropdown items
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth < 992 && navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    // Close the navbar collapse
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                    if (bsCollapse) bsCollapse.hide();
+                }
+            });
+        });
+        
+        // Close navbar when clicking regular nav links (not dropdown)
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 992 && navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                    if (bsCollapse) bsCollapse.hide();
+                }
+            });
+        });
+    })();
+</script>
+</body>
+</html>

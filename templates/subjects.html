@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subjects | College Management System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f4f6f9;
+    }
+    
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        position: fixed;
+        background: linear-gradient(180deg, #1a1a2e, #16213e);
+        color: white;
+        padding: 25px 20px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+    
+    .sidebar .logo {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .sidebar .logo i {
+        color: #4CAF50;
+        margin-right: 8px;
+    }
+    
+    .sidebar a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #ccc;
+        text-decoration: none;
+        padding: 12px 15px;
+        margin: 5px 0;
+        border-radius: 10px;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+    
+    .sidebar a i {
+        width: 22px;
+        font-size: 16px;
+    }
+    
+    .sidebar a:hover {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        transform: translateX(5px);
+    }
+    
+    .sidebar a.active {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+    }
+    
+    .main-content {
+        margin-left: 260px;
+        padding: 30px;
+        min-height: 100vh;
+    }
+    
+    .card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        border: 1px solid #eee;
+        overflow: hidden;
+        margin-bottom: 25px;
+    }
+    
+    .card-header {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        padding: 15px 20px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    
+    .card-header i {
+        margin-right: 8px;
+    }
+    
+    .card-body {
+        padding: 25px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        font-size: 13px;
+        color: #333;
+    }
+    
+    .form-group label i {
+        margin-right: 6px;
+        color: #4CAF50;
+    }
+    
+    input, select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        outline: none;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+    
+    input:focus, select:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 5px rgba(76,175,80,0.3);
+    }
+    
+    button {
+        width: 100%;
+        padding: 10px;
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-weight: 500;
+        margin-top: 10px;
+    }
+    
+    button:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .filter-section {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .filter-row {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .filter-group {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .filter-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 13px;
+        color: #333;
+    }
+    
+    .filter-group label i {
+        margin-right: 6px;
+        color: #4CAF50;
+    }
+    
+    .filter-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    
+    .btn-filter, .btn-reset {
+        padding: 6px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+        border: none;
+        width: auto;
+        margin-top: 0;
+    }
+    
+    .btn-filter {
+        background: #4CAF50;
+        color: white;
+    }
+    
+    .btn-reset {
+        background: #6c757d;
+        color: white;
+    }
+    
+    .btn-filter:hover, .btn-reset:hover {
+        transform: scale(1.02);
+    }
+    
+    .take-attendance-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    
+    .info-box {
+        background: #e8f5e9;
+        padding: 12px 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        color: #2E7D32;
+        border-left: 4px solid #4CAF50;
+    }
+    
+    .selected-info {
+        background: #e3f2fd;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 13px;
+        display: none;
+    }
+    
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 70px;
+            padding: 20px 10px;
+        }
+        
+        .sidebar .logo {
+            font-size: 0;
+        }
+        
+        .sidebar .logo i {
+            font-size: 20px;
+        }
+        
+        .sidebar a span {
+            display: none;
+        }
+        
+        .sidebar a {
+            justify-content: center;
+            padding: 12px;
+        }
+        
+        .sidebar a i {
+            margin: 0;
+        }
+        
+        .main-content {
+            margin-left: 70px;
+            padding: 15px;
+        }
+        
+        .filter-row {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+    
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #4CAF50;
+        border-radius: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">
+        <i class="fas fa-graduation-cap"></i> Elite University
+    </div>
+    
+    <a href="/dashboard">
+        <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+    </a>
+    <a href="/students">
+        <i class="fas fa-users"></i> <span>Students</span>
+    </a>
+    <a href="/subjects" class="active">
+        <i class="fas fa-book"></i> <span>Subjects</span>
+    </a>
+    <a href="/attendance">
+        <i class="fas fa-calendar-check"></i> <span>Attendance</span>
+    </a>
+    <a href="/add-marks">
+        <i class="fas fa-plus-circle"></i> <span>Add Marks</span>
+    </a>
+    <a href="/fees">
+        <i class="fas fa-rupee-sign"></i> <span>Fees</span>
+    </a>
+    <a href="/logout">
+        <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+    </a>
+</div>
+
+<div class="main-content">
+
+    <!-- ADD SUBJECT -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-plus-circle"></i> Add New Subject
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label><i class="fas fa-book"></i> Subject Name</label>
+                            <input type="text" name="name" placeholder="e.g., Mathematics" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><i class="fas fa-graduation-cap"></i> Course</label>
+                            <select name="course" class="form-control" id="courseSelect" required>
+                                <option value="">Select Course</option>
+                                <optgroup label="🎓 UNDERGRADUATE (UG)">
+                                    <option value="B.Tech (UG)">B.Tech (UG)</option>
+                                    <option value="BCA (UG)">BCA (UG)</option>
+                                    <option value="B.Com (UG)">B.Com (UG)</option>
+                                    <option value="LLB (UG)">LLB (UG)</option>
+                                </optgroup>
+                                <optgroup label="📚 POSTGRADUATE (PG)">
+                                    <option value="MCA (PG)">MCA (PG)</option>
+                                    <option value="M.Tech (PG)">M.Tech (PG)</option>
+                                    <option value="MBA (PG)">MBA (PG)</option>
+                                    <option value="M.Sc (PG)">M.Sc (PG)</option>
+                                    <option value="LLM (PG)">LLM (PG)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label><i class="fas fa-layer-group"></i> Semester</label>
+                            <input type="number" name="semester" placeholder="1-8" min="1" max="8" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">
+                    <i class="fas fa-save"></i> Add Subject
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FILTER & TAKE ATTENDANCE -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-filter"></i> Filter Subjects & Take Attendance
+        </div>
+        <div class="card-body">
+            
+            <div class="filter-section">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label><i class="fas fa-graduation-cap"></i> Filter by Course Type</label>
+                        <select id="courseTypeFilter" class="form-control">
+                            <option value="all">-- All Courses --</option>
+                            <option value="UG">🎓 Undergraduate (UG)</option>
+                            <option value="PG">📚 Postgraduate (PG)</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label><i class="fas fa-book"></i> Filter by Specific Course</label>
+                        <select id="courseFilter" class="form-control">
+                            <option value="all">-- All Courses --</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label><i class="fas fa-layer-group"></i> Filter by Semester</label>
+                        <select id="semesterFilter" class="form-control">
+                            <option value="all">-- All Semesters --</option>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                            <option value="7">Semester 7</option>
+                            <option value="8">Semester 8</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-buttons">
+                    <button class="btn-filter" onclick="applyFilter()">🔍 Apply Filter</button>
+                    <button class="btn-reset" onclick="resetFilter()">🔄 Reset</button>
+                </div>
+            </div>
+            
+            <div class="take-attendance-section">
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i> 
+                    Select a subject to mark attendance.
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-book"></i> Select Subject</label>
+                    <select id="subjectSelect" class="form-control" size="10" style="height: auto; min-height: 200px;">
+                        <option value="">-- Select Subject --</option>
+                        {% for sub in subjects %}
+                            <option value="{{ sub['id'] }}" data-course="{{ sub['course'] }}" data-semester="{{ sub['semester'] }}">
+                                {{ sub['name'] }} ({{ sub['course'] }} - Semester {{ sub['semester'] }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div id="selectedInfo" class="selected-info"></div>
+                
+                <button type="button" class="take-attendance-btn" onclick="proceedToAttendance()">
+                    <i class="fas fa-arrow-right"></i> Take Attendance
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// Store original options
+let originalOptions = [];
+
+// Unique courses list
+const ugCourses = ['B.Tech (UG)', 'BCA (UG)', 'B.Com (UG)', 'LLB (UG)'];
+const pgCourses = ['MCA (PG)', 'M.Tech (PG)', 'MBA (PG)', 'M.Sc (PG)', 'LLM (PG)'];
+
+// Save original options on page load
+window.onload = function() {
+    let select = document.getElementById('subjectSelect');
+    for (let i = 0; i < select.options.length; i++) {
+        originalOptions.push({
+            value: select.options[i].value,
+            text: select.options[i].text,
+            course: select.options[i].getAttribute('data-course'),
+            semester: select.options[i].getAttribute('data-semester')
+        });
+    }
+    
+    // Initialize course filter dropdown
+    updateCourseFilter('all');
+    
+    // Add event listener for course type change
+    document.getElementById('courseTypeFilter').addEventListener('change', function() {
+        updateCourseFilter(this.value);
+    });
+};
+
+function updateCourseFilter(courseType) {
+    let courseSelect = document.getElementById('courseFilter');
+    
+    // Clear current options except first
+    while (courseSelect.options.length > 1) {
+        courseSelect.remove(1);
+    }
+    
+    let coursesToAdd = [];
+    if (courseType === 'UG') {
+        coursesToAdd = ugCourses;
+    } else if (courseType === 'PG') {
+        coursesToAdd = pgCourses;
+    } else {
+        coursesToAdd = [...ugCourses, ...pgCourses];
+    }
+    
+    // Remove duplicates
+    let uniqueCourses = [...new Set(coursesToAdd)];
+    
+    for (let course of uniqueCourses) {
+        let option = document.createElement('option');
+        option.value = course;
+        option.text = course;
+        courseSelect.appendChild(option);
+    }
+}
+
+function applyFilter() {
+    let courseType = document.getElementById('courseTypeFilter').value;
+    let course = document.getElementById('courseFilter').value;
+    let semester = document.getElementById('semesterFilter').value;
+    let select = document.getElementById('subjectSelect');
+    
+    // Clear current options
+    select.innerHTML = '';
+    
+    // Add filtered options
+    let addedCount = 0;
+    for (let i = 0; i < originalOptions.length; i++) {
+        let opt = originalOptions[i];
+        if (opt.value === "") {
+            let option = document.createElement('option');
+            option.value = "";
+            option.text = "-- Select Subject --";
+            select.appendChild(option);
+            continue;
+        }
+        
+        let courseMatch = true;
+        let typeMatch = true;
+        
+        if (course !== 'all') {
+            courseMatch = (opt.course === course);
+        }
+        
+        if (courseType !== 'all') {
+            if (courseType === 'UG') {
+                typeMatch = opt.course.includes('(UG)');
+            } else if (courseType === 'PG') {
+                typeMatch = opt.course.includes('(PG)');
+            }
+        }
+        
+        let semesterMatch = (semester === 'all' || opt.semester == semester);
+        
+        if (courseMatch && semesterMatch && typeMatch) {
+            let option = document.createElement('option');
+            option.value = opt.value;
+            option.text = opt.text;
+            option.setAttribute('data-course', opt.course);
+            option.setAttribute('data-semester', opt.semester);
+            select.appendChild(option);
+            addedCount++;
+        }
+    }
+    
+    if (addedCount === 0) {
+        let option = document.createElement('option');
+        option.value = "";
+        option.text = "-- No subjects found --";
+        option.disabled = true;
+        option.style.color = '#999';
+        select.appendChild(option);
+    }
+    
+    let infoDiv = document.getElementById('selectedInfo');
+    if (courseType !== 'all' || course !== 'all' || semester !== 'all') {
+        let typeText = courseType === 'all' ? 'All' : (courseType === 'UG' ? 'Undergraduate (UG)' : 'Postgraduate (PG)');
+        let courseText = course === 'all' ? 'All Courses' : course;
+        let semesterText = semester === 'all' ? 'All Semesters' : 'Semester ' + semester;
+        infoDiv.innerHTML = '<i class="fas fa-filter"></i> Filtered by: <strong>' + typeText + '</strong> | <strong>' + courseText + '</strong> | <strong>' + semesterText + '</strong>';
+        infoDiv.style.display = 'block';
+    } else {
+        infoDiv.style.display = 'none';
+    }
+}
+
+function resetFilter() {
+    document.getElementById('courseTypeFilter').value = 'all';
+    document.getElementById('courseFilter').value = 'all';
+    document.getElementById('semesterFilter').value = 'all';
+    
+    let select = document.getElementById('subjectSelect');
+    select.innerHTML = '';
+    
+    for (let i = 0; i < originalOptions.length; i++) {
+        let opt = originalOptions[i];
+        let option = document.createElement('option');
+        option.value = opt.value;
+        option.text = opt.text;
+        if (opt.value === "") {
+            option.text = "-- Select Subject --";
+        }
+        option.setAttribute('data-course', opt.course);
+        option.setAttribute('data-semester', opt.semester);
+        select.appendChild(option);
+    }
+    
+    document.getElementById('selectedInfo').style.display = 'none';
+}
+
+function proceedToAttendance() {
+    let subjectSelect = document.getElementById('subjectSelect');
+    let subjectId = subjectSelect.value;
+    
+    if (!subjectId) {
+        alert("⚠️ Please select a subject first!");
+        return;
+    }
+    
+    let btn = event.currentTarget;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+    btn.disabled = true;
+    
+    window.location.href = "/attendance?subject_id=" + subjectId;
+}
+</script>
+
+</body>
+</html>

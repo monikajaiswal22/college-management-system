@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher - Students | College Management System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f4f6f9;
+    }
+    
+    /* ================= SIDEBAR ================= */
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        position: fixed;
+        background: linear-gradient(180deg, #1a1a2e, #16213e);
+        color: white;
+        padding: 20px 15px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+    
+    .sidebar .logo {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .sidebar .logo i {
+        color: #4CAF50;
+        margin-right: 8px;
+    }
+    
+    .sidebar .nav-section {
+        margin-bottom: 20px;
+    }
+    
+    .sidebar .nav-title {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: #64748b;
+        margin: 10px 0 8px 10px;
+        letter-spacing: 1px;
+    }
+    
+    .sidebar a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #cbd5e1;
+        text-decoration: none;
+        padding: 10px 12px;
+        margin: 3px 0;
+        border-radius: 10px;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+    
+    .sidebar a i {
+        width: 22px;
+        font-size: 16px;
+    }
+    
+    .sidebar a:hover {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        transform: translateX(5px);
+    }
+    
+    .sidebar a.active {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+    }
+    
+    /* ================= MAIN CONTENT ================= */
+    .main-content {
+        margin-left: 260px;
+        padding: 20px;
+        min-height: 100vh;
+    }
+    
+    /* ================= CARDS ================= */
+    .card {
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        border: 1px solid #eee;
+        background: white;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        padding: 15px 20px;
+        border-radius: 12px 12px 0 0;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    
+    .card-header i {
+        margin-right: 8px;
+    }
+    
+    .card-body {
+        padding: 20px;
+    }
+    
+    /* Search Box */
+    .search-box {
+        position: relative;
+        margin-bottom: 20px;
+    }
+    
+    .search-box i {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+        z-index: 1;
+    }
+    
+    .search-box input {
+        padding: 10px 10px 10px 35px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        width: 100%;
+        transition: 0.3s;
+    }
+    
+    .search-box input:focus {
+        border-color: #4CAF50;
+        outline: none;
+        box-shadow: 0 0 5px rgba(76,175,80,0.3);
+    }
+    
+    /* Table */
+    .table {
+        margin-top: 0;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .table thead th {
+        background: #1a1a2e;
+        color: white;
+        padding: 12px 10px;
+        font-size: 13px;
+        font-weight: 600;
+        border: none;
+    }
+    
+    .table tbody td {
+        padding: 10px;
+        vertical-align: middle;
+        font-size: 13px;
+        color: #333;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .table tbody tr:hover {
+        background: #f5f5f5;
+    }
+    
+    /* Buttons - Teacher Only View */
+    .btn-sm {
+        border-radius: 6px;
+        padding: 5px 10px;
+        margin: 0 2px;
+        transition: 0.2s;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+    }
+    
+    .btn-sm:hover {
+        transform: scale(1.03);
+    }
+    
+    .btn-info { background: #0dcaf0; border: none; color: white; }
+    
+    .profile-img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #999;
+    }
+    
+    .empty-state i {
+        font-size: 48px;
+        margin-bottom: 15px;
+        color: #ddd;
+    }
+    
+    .role-badge {
+        background: #e8f5e9;
+        color: #2E7D32;
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        display: inline-block;
+    }
+    
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .page-header h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin: 0;
+    }
+    
+    .page-header h2 i {
+        color: #4CAF50;
+        margin-right: 10px;
+    }
+    
+    /* Stats Cards - Dynamic */
+    .stats-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .stat-card {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        border: 1px solid #eee;
+        transition: 0.3s;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .stat-card h3 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #4CAF50;
+        margin: 0;
+    }
+    
+    .stat-card p {
+        color: #666;
+        font-size: 12px;
+        margin: 8px 0 0;
+        font-weight: 500;
+    }
+    
+    .stat-card i {
+        font-size: 28px;
+        color: #4CAF50;
+        margin-bottom: 8px;
+        display: block;
+    }
+    
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 70px;
+            padding: 15px 8px;
+        }
+        
+        .sidebar .logo {
+            font-size: 0;
+        }
+        
+        .sidebar .logo i {
+            font-size: 20px;
+        }
+        
+        .sidebar .nav-title {
+            display: none;
+        }
+        
+        .sidebar a span {
+            display: none;
+        }
+        
+        .sidebar a {
+            justify-content: center;
+            padding: 10px;
+        }
+        
+        .sidebar a i {
+            margin: 0;
+        }
+        
+        .main-content {
+            margin-left: 70px;
+            padding: 15px;
+        }
+        
+        .page-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .stats-row {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .table {
+            font-size: 11px;
+        }
+        
+        .table thead th,
+        .table tbody td {
+            padding: 6px;
+        }
+        
+        .btn-sm {
+            padding: 3px 6px;
+            font-size: 10px;
+        }
+    }
+    
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #4CAF50;
+        border-radius: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="logo">
+        <i class="fas fa-chalkboard-user"></i> Elite University
+    </div>
+    
+    <a href="/teacher-dashboard" class="active">
+        <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+    </a>
+    <a href="/teacher-subjects">
+    <i class="fas fa-calendar-check"></i> <span>Take Attendance</span>
+</a>
+    <a href="/teacher-attendance" class="nav-link">
+    <i class="fas fa-calendar-check"></i> <span>Attendance</span>
+</a>
+    <a href="/add-marks">
+        <i class="fas fa-plus-circle"></i> <span>Add Marks</span>
+    </a>
+    <a href="/teacher/students">
+        <i class="fas fa-users"></i> <span>Students</span>
+    </a>
+    <a href="/logout">
+        <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+    </a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+<div class="container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h2>
+            <i class="fas fa-users"></i> Students List
+        </h2>
+        <div class="role-badge">
+            <i class="fas fa-chalkboard-user"></i> Teacher View (Read Only)
+        </div>
+    </div>
+
+    <!-- Stats Cards - Dynamic Course Stats -->
+    <div class="stats-row">
+        <div class="stat-card">
+            <i class="fas fa-users"></i>
+            <h3>{{ students|length }}</h3>
+            <p>Total Students</p>
+        </div>
+        
+        <!-- Dynamically show all courses with their counts -->
+        {% set courses_dict = {} %}
+        {% for s in students %}
+            {% set course = s['course'] %}
+            {% if course %}
+                {% if courses_dict.update({course: courses_dict.get(course, 0) + 1}) %}{% endif %}
+            {% endif %}
+        {% endfor %}
+        
+        <!-- Course Icons Mapping -->
+        {% set course_icons = {
+            'B.Tech': 'laptop-code',
+            'BCA': 'chalkboard-user',
+            'MBA': 'chart-line',
+            'MCA': 'calculator',
+            'LLB': 'balance-scale',
+            'B.Com': 'chart-simple',
+            'M.Sc': 'flask',
+            'BA': 'book',
+            'MA': 'book-open',
+            'BBA': 'briefcase'
+        } %}
+        
+        {% for course, count in courses_dict.items() %}
+        <div class="stat-card">
+            <i class="fas fa-{{ course_icons.get(course, 'book') }}"></i>
+            <h3>{{ count }}</h3>
+            <p>{{ course }}</p>
+        </div>
+        {% endfor %}
+        
+        <!-- If no courses found -->
+        {% if courses_dict|length == 0 %}
+        <div class="stat-card">
+            <i class="fas fa-info-circle"></i>
+            <h3>0</h3>
+            <p>No Courses</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Students Card - ONLY VIEW, NO EDIT/DELETE -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-list"></i> All Students
+        </div>
+        <div class="card-body">
+            
+            <!-- Search Box -->
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" class="form-control" placeholder="Search by name, roll number or course...">
+            </div>
+            
+            <!-- Table - Only View Actions -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Roll No</th>
+                            <th>Course</th>
+                            <th>Semester</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTableBody">
+                        {% for s in students %}
+                        <tr>
+                            <td>{{ s['id'] }}</td>
+                            <td>
+                                {% if s['photo'] and s['photo'] != 'default.png' %}
+                                <img src="{{ url_for('static', filename='uploads/' + s['photo']) }}" class="profile-img">
+                                {% else %}
+                                <img src="https://ui-avatars.com/api/?name={{ s['name']|replace(' ', '+') }}&background=4CAF50&color=fff&size=35" class="profile-img">
+                                {% endif %}
+                              </td>
+                            <td><strong>{{ s['name'] }}</strong></td>
+                            <td>{{ s['roll_no'] }}</td>
+                            <td>
+                                <span class="badge" style="background: #e8f5e9; color: #2E7D32; padding: 4px 10px; border-radius: 20px;">
+                                    {{ s['course'] }}
+                                </span>
+                            </td>
+                            <td>{{ s['semester'] }}</td>
+                            <td>{{ s['email'] }}</td>
+                            <td>{{ s['phone'] or '-' }}</td>
+                            <td class="action-btns">
+                                <a href="/teacher-view-student/{{ s['id'] }}" class="btn btn-info btn-sm" title="View Profile">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            {% if students|length == 0 %}
+            <div class="empty-state">
+                <i class="fas fa-user-graduate"></i>
+                <p>No students found.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<script>
+// Search functionality
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    let searchValue = this.value.toLowerCase().trim();
+    let tableRows = document.querySelectorAll('#studentsTableBody tr');
+    let hasResults = false;
+    
+    tableRows.forEach(row => {
+        let name = row.cells[2]?.innerText?.toLowerCase() || '';
+        let rollNo = row.cells[3]?.innerText?.toLowerCase() || '';
+        let course = row.cells[4]?.innerText?.toLowerCase() || '';
+        
+        if (name.includes(searchValue) || rollNo.includes(searchValue) || course.includes(searchValue)) {
+            row.style.display = '';
+            hasResults = true;
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    let existingEmpty = document.querySelector('#studentsTableBody .empty-row');
+    if (existingEmpty) existingEmpty.remove();
+    
+    if (!hasResults && tableRows.length > 0) {
+        let tbody = document.getElementById('studentsTableBody');
+        let tr = document.createElement('tr');
+        tr.className = 'empty-row';
+        let td = document.createElement('td');
+        td.colSpan = 9;
+        td.className = 'empty-state';
+        td.innerHTML = '<i class="fas fa-search"></i><p>No students found matching your search</p>';
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admission 2026 | Elite University | Apply Now</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Apply for admission 2026 at Elite University. Check important dates, eligibility criteria, and apply online for undergraduate and postgraduate programs.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+        
+        :root {
+            --green-deep: #047857;
+            --green-primary: #10b981;
+            --green-soft: #34d399;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-900: #0f172a;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        }
+        
+        .container {
+            width: 100%;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (min-width: 640px) { .container { max-width: 640px; } }
+        @media (min-width: 768px) { .container { max-width: 768px; padding-left: 1.5rem; padding-right: 1.5rem; } }
+        @media (min-width: 1024px) { .container { max-width: 1024px; } }
+        @media (min-width: 1280px) { .container { max-width: 1200px; } }
+        
+        /* Navbar - Fixed for mobile dropdown */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 0.85rem 0;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--gray-900) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .navbar-brand i {
+            color: var(--green-primary);
+            font-size: 1.6rem;
+        }
+        
+        .navbar-toggler {
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 0.5rem 0.75rem;
+        }
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+            outline: none;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--gray-600) !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            margin: 0 2px;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--green-primary) !important;
+            background: rgba(16, 185, 129, 0.08);
+        }
+        
+        /* FIXED: Mobile dropdown styling */
+        @media (max-width: 991.98px) {
+            .dropdown-menu {
+                border: none;
+                background: transparent;
+                box-shadow: none;
+                padding-left: 1.25rem;
+                margin-top: 0;
+                position: static !important;
+                transform: none !important;
+                width: 100%;
+            }
+            .dropdown-menu.show {
+                display: block;
+                background: rgba(241, 245, 249, 0.6);
+                border-radius: 12px;
+                margin-top: 0.25rem;
+            }
+            .dropdown-item {
+                color: var(--gray-700);
+                padding: 0.6rem 1rem 0.6rem 2rem;
+                font-size: 0.85rem;
+            }
+            .dropdown-item i {
+                width: 1.5rem;
+                margin-right: 0.5rem;
+            }
+            .dropdown-toggle::after {
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .nav-item.dropdown {
+                position: relative;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .dropdown-menu {
+                border: 1px solid var(--gray-200);
+                border-radius: 16px;
+                padding: 0.5rem 0;
+                margin-top: 0.5rem;
+                box-shadow: var(--shadow-md);
+                background: var(--white);
+                position: absolute;
+            }
+        }
+        
+        .dropdown-menu {
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            box-shadow: var(--shadow-md);
+            background: var(--white);
+        }
+        .dropdown-item {
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.6rem 1.5rem;
+            color: var(--gray-700);
+            transition: all 0.2s;
+        }
+        .dropdown-item:hover {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--green-primary);
+        }
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .page-header { padding: 4.5rem 1rem; }
+        }
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #064e3b, #059669);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        @media (min-width: 768px) {
+            .page-header h1 { font-size: 3rem; }
+        }
+        .page-header p {
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--gray-600);
+        }
+        @media (min-width: 768px) {
+            .page-header p { font-size: 1.1rem; }
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 1.5rem;
+            border: 1px solid var(--gray-200);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .card-header {
+            background: var(--white);
+            padding: 1.25rem 1.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--green-primary);
+            color: var(--gray-900);
+        }
+        .card-header i {
+            color: var(--green-primary);
+            margin-right: 0.7rem;
+            font-size: 1.2rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        @media (max-width: 576px) {
+            .card-header { padding: 1rem 1.25rem; font-size: 1rem; }
+            .card-body { padding: 1.25rem; }
+        }
+        
+        /* Date List */
+        .date-list {
+            list-style: none;
+            padding: 0;
+        }
+        .date-list li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .date-list li:last-child {
+            border-bottom: none;
+        }
+        .date-list i {
+            color: var(--green-primary);
+            font-size: 1.1rem;
+            width: 1.5rem;
+        }
+        .date-list strong {
+            color: var(--gray-900);
+        }
+        
+        /* Apply Card */
+        .apply-card {
+            text-align: center;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        }
+        .btn-admission {
+            background: var(--green-primary);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+        }
+        .btn-admission:hover {
+            background: var(--green-deep);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            color: white;
+        }
+        
+        /* Fee Structure Table */
+        .fee-table {
+            width: 100%;
+        }
+        .fee-table tr {
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .fee-table td {
+            padding: 0.8rem 0;
+        }
+        .fee-table td:last-child {
+            font-weight: 600;
+            color: var(--gray-900);
+            text-align: right;
+        }
+        
+        /* Steps */
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--green-primary);
+            color: white;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .step-content h6 {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: var(--gray-900);
+        }
+        .step-content p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin: 0;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        .footer h5 {
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .footer a:hover {
+            color: var(--green-soft);
+            padding-left: 4px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+        .social-icons a:hover {
+            background: var(--green-primary);
+            transform: translateY(-3px);
+            color: white;
+            padding-left: 0;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.75rem;
+        }
+        
+        @media (max-width: 768px) {
+            .footer .row > div { margin-bottom: 2rem; }
+        }
+        
+        /* Animations */
+        .animate-once {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .animate-once.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--green-primary);
+            border-radius: 8px;
+        }
+        
+        /* Alert Box */
+        .alert-info-custom {
+            background: #ecfdf5;
+            border-left: 4px solid var(--green-primary);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation with FIXED mobile dropdown -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Elite University</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/courses"><i class="fas fa-book"></i> Courses</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/admission"><i class="fas fa-arrow-right"></i> Admission</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                <!-- FIXED: Login Dropdown with proper attributes -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                        <li><a class="dropdown-item" href="/admin-login"><i class="fas fa-user-shield me-2"></i> Admin Login</a></li>
+                        <li><a class="dropdown-item" href="/teacher-login"><i class="fas fa-chalkboard-user me-2"></i> Teacher Login</a></li>
+                        <li><a class="dropdown-item" href="/student-login"><i class="fas fa-user-graduate me-2"></i> Student Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Admission 2026</h1>
+        <p>Apply now for the upcoming academic year. Limited seats available for undergraduate and postgraduate programs!</p>
+    </div>
+</section>
+
+<div class="container py-4">
+    <div class="row g-4">
+        <!-- Left Column - Important Info -->
+        <div class="col-lg-8">
+            <!-- Important Dates Card -->
+            <div class="card animate-once">
+                <div class="card-header">
+                    <i class="fas fa-calendar-alt"></i> Important Dates
+                </div>
+                <div class="card-body">
+                    <ul class="date-list">
+                        <li><i class="fas fa-check-circle"></i> Application Start: <strong>January 15, 2026</strong></li>
+                        <li><i class="fas fa-check-circle"></i> Last Date to Apply: <strong>March 31, 2026</strong></li>
+                        <li><i class="fas fa-check-circle"></i> Entrance Exam: <strong>April 15-20, 2026</strong></li>
+                        <li><i class="fas fa-check-circle"></i> Result Declaration: <strong>May 10, 2026</strong></li>
+                        <li><i class="fas fa-check-circle"></i> Counseling Starts: <strong>May 25, 2026</strong></li>
+                        <li><i class="fas fa-check-circle"></i> Classes Begin: <strong>July 1, 2026</strong></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Eligibility Criteria Card -->
+            <div class="card animate-once">
+                <div class="card-header">
+                    <i class="fas fa-file-alt"></i> Eligibility Criteria
+                </div>
+                <div class="card-body">
+                    <div class="alert-info-custom">
+                        <i class="fas fa-info-circle text-success me-2"></i> 
+                        <strong>General Requirement:</strong> Minimum 50% marks in qualifying examination (45% for reserved categories)
+                    </div>
+                    
+                    <h6 class="fw-bold mt-3"><i class="fas fa-microchip text-success me-2"></i> For B.Tech:</h6>
+                    <p class="mb-3">10+2 with Physics, Chemistry, Mathematics (minimum 60% marks) + Valid JEE Main / University Entrance Score</p>
+                    
+                    <h6 class="fw-bold"><i class="fas fa-chart-line text-success me-2"></i> For MBA:</h6>
+                    <p class="mb-3">Bachelor's degree in any discipline (minimum 50% marks) + Valid CAT/MAT/CMAT/XAT Score</p>
+                    
+                    <h6 class="fw-bold"><i class="fas fa-code text-success me-2"></i> For MCA:</h6>
+                    <p class="mb-3">Bachelor's degree in BCA / B.Sc (IT/CS) with Mathematics at 10+2 or graduation level (minimum 50% marks)</p>
+                    
+                    <h6 class="fw-bold"><i class="fas fa-calculator text-success me-2"></i> For B.Com / BBA:</h6>
+                    <p>10+2 in any stream (minimum 50% marks) + Merit-based admission</p>
+                </div>
+            </div>
+            
+            <!-- Fee Structure Card -->
+            <div class="card animate-once">
+                <div class="card-header">
+                    <i class="fas fa-rupee-sign"></i> Fee Structure (Per Annum)
+                </div>
+                <div class="card-body">
+                    <table class="fee-table">
+                        <tr><td>B.Tech (All Specializations)</td><td>₹ 1,50,000</td></tr>
+                        <tr><td>MBA</td><td>₹ 2,00,000</td></tr>
+                        <tr><td>MCA</td><td>₹ 1,20,000</td></tr>
+                        <tr><td>B.Com / BBA</td><td>₹ 80,000</td></tr>
+                        <tr><td>M.Sc / MA</td><td>₹ 90,000</td></tr>
+                        <tr><td>LLB / LLM</td><td>₹ 1,00,000</td></tr>
+                    </table>
+                    <div class="alert-info-custom mt-3">
+                        <i class="fas fa-graduation-cap text-success me-2"></i>
+                        <strong>Scholarships Available:</strong> Merit-based scholarships up to 100% for top performers. Reserved category scholarships as per government norms.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Column - Apply & Steps -->
+        <div class="col-lg-4">
+            <!-- Apply Now Card -->
+            <div class="card apply-card animate-once">
+                <div class="card-header">
+                    <i class="fas fa-arrow-right"></i> Apply Now
+                </div>
+                <div class="card-body text-center">
+                    <i class="fas fa-file-alt" style="font-size: 48px; color: var(--green-primary);"></i>
+                    <p class="mt-3">Fill the online application form and submit required documents</p>
+                    <a href="/apply" class="btn-admission">Apply Online <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+            
+            <!-- Application Process Card -->
+            <div class="card animate-once">
+                <div class="card-header">
+                    <i class="fas fa-list-ol"></i> How to Apply
+                </div>
+                <div class="card-body">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h6>Register Online</h6>
+                            <p>Create an account on our admission portal</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h6>Fill Application</h6>
+                            <p>Complete the application form with personal & academic details</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h6>Upload Documents</h6>
+                            <p>Upload scanned copies of marksheets, photo, and signature</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h6>Pay Application Fee</h6>
+                            <p>Pay ₹ 1200 (General) / ₹ 600 (SC/ST) via online mode</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h6>Submit & Print</h6>
+                            <p>Submit final application and take printout for future reference</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact for Admission -->
+            <div class="card animate-once">
+                <div class="card-header">
+                    <i class="fas fa-headset"></i> Admission Helpdesk
+                </div>
+                <div class="card-body text-center">
+                    <i class="fas fa-phone-alt" style="font-size: 32px; color: var(--green-primary);"></i>
+                    <p class="mt-2 mb-1"><strong>Toll Free:</strong> 1800-123-4567</p>
+                    <p class="mb-1"><strong>WhatsApp:</strong> +91 98765 43210</p>
+                    <p><strong>Email:</strong> admissions@eliteuniversity.edu</p>
+                    <hr>
+                    <p class="small text-muted mb-0">Monday to Saturday | 9:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-12 col-md-4">
+                <h5><i class="fas fa-university me-2"></i> Elite University</h5>
+                <p>123 Education Street, Knowledge City<br>PIN: 110001, New Delhi, India</p>
+                <p><i class="fas fa-phone-alt me-2"></i> +91 1234567890<br><i class="fas fa-envelope me-2"></i> info@eliteuniversity.edu</p>
+            </div>
+            <div class="col-6 col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="/about"><i class="fas fa-chevron-right fa-xs me-1"></i> About Us</a></li>
+                    <li class="mb-2"><a href="/courses"><i class="fas fa-chevron-right fa-xs me-1"></i> Courses</a></li>
+                    <li class="mb-2"><a href="/admission"><i class="fas fa-chevron-right fa-xs me-1"></i> Admission 2026</a></li>
+                    <li class="mb-2"><a href="/contact"><i class="fas fa-chevron-right fa-xs me-1"></i> Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-4">
+                <h5>Follow Us</h5>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                <h5 class="mt-4">Newsletter</h5>
+                <div class="d-flex gap-2 mt-2">
+                    <input type="email" class="form-control" style="background: #1e293b; border: 1px solid #334155; border-radius: 10px; color: white; font-size: 0.85rem;" placeholder="Your Email">
+                    <button class="btn btn-success" style="background: #10b981; border: none; border-radius: 10px; padding: 0.5rem 1rem; font-weight: 500;">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Elite University. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #10b981;"></i> for Excellence</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    (function() {
+        // Intersection Observer for animations
+        const elements = document.querySelectorAll('.animate-once');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -10px 0px" });
+        
+        elements.forEach(el => observer.observe(el));
+        
+        // Initial check for visible elements
+        window.addEventListener('load', () => {
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 70) {
+                    el.classList.add('revealed');
+                    observer.unobserve(el);
+                }
+            });
+        });
+        
+        // FIXED: Mobile dropdown handling - prevents navbar collapse when clicking dropdown toggle
+        const dropdownToggle = document.querySelector('#loginDropdown');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        
+        if (dropdownToggle) {
+            dropdownToggle.addEventListener('click', function(e) {
+                // On mobile, prevent the navbar from collapsing when toggling dropdown
+                if (window.innerWidth < 992) {
+                    e.stopPropagation();
+                }
+            });
+        }
+        
+        // Close mobile menu when clicking on dropdown items
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth < 992 && navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                    if (bsCollapse) bsCollapse.hide();
+                }
+            });
+        });
+        
+        // Close navbar when clicking regular nav links
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 992 && navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                    if (bsCollapse) bsCollapse.hide();
+                }
+            });
+        });
+    })();
+</script>
+</body>
+</html>

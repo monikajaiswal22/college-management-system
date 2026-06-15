@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile | Elite University</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        background: #f5f7fa;
+        color: #1e293b;
+        min-height: 100vh;
+        font-size: 14px;
+    }
+    
+    /* ================= SIDEBAR ================= */
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        position: fixed;
+        background: linear-gradient(180deg, #1a1a2e, #16213e);
+        color: white;
+        padding: 25px 20px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+    }
+    
+    .sidebar .logo {
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .sidebar .logo i {
+        color: #10b981;
+        margin-right: 8px;
+    }
+    
+    .sidebar .nav-item {
+        margin: 5px 0;
+    }
+    
+    .sidebar .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #ccc;
+        text-decoration: none;
+        padding: 12px 15px;
+        border-radius: 10px;
+        transition: 0.3s;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    
+    .sidebar .nav-link i {
+        width: 22px;
+        font-size: 15px;
+    }
+    
+    .sidebar .nav-link:hover {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        transform: translateX(5px);
+    }
+    
+    .sidebar .nav-link.active {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+    }
+    
+    .sidebar-footer {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    /* ================= MAIN ================= */
+    .main {
+        margin-left: 260px;
+        padding: 25px;
+        min-height: 100vh;
+    }
+    
+    /* Topbar */
+    .topbar {
+        background: white;
+        padding: 15px 25px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .topbar h4 {
+        margin: 0;
+        color: #1e293b;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    
+    .topbar h4 i {
+        color: #10b981;
+        margin-right: 8px;
+    }
+    
+    .topbar small {
+        color: #64748b;
+        font-size: 12px;
+    }
+    
+    .student-badge {
+        background: #10b981;
+        padding: 6px 16px;
+        border-radius: 20px;
+        color: white;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
+    /* ================= PROFILE CARD ================= */
+    .profile-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+        max-width: 550px;
+        margin: 0 auto;
+    }
+    
+    .card-header {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 20px 25px;
+    }
+    
+    .card-header h4 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    
+    .card-header h4 i {
+        margin-right: 8px;
+    }
+    
+    .card-header p {
+        margin: 8px 0 0;
+        font-size: 12px;
+        opacity: 0.9;
+    }
+    
+    .card-body {
+        padding: 25px;
+    }
+    
+    /* Profile Image */
+    .profile-image-container {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    
+    .profile-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #10b981;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .profile-placeholder {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #10b981, #059669);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        border: 3px solid white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .profile-placeholder i {
+        font-size: 50px;
+        color: white;
+    }
+    
+    /* Form Groups */
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 12px;
+        color: #475569;
+    }
+    
+    .form-group label i {
+        margin-right: 6px;
+        color: #10b981;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .form-control:focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        outline: none;
+    }
+    
+    /* File Input */
+    .file-input {
+        padding: 8px 12px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    
+    .file-input::file-selector-button {
+        background: #10b981;
+        color: white;
+        border: none;
+        padding: 6px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-right: 12px;
+        transition: 0.3s;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .file-input::file-selector-button:hover {
+        background: #059669;
+    }
+    
+    /* Info Box */
+    .info-box {
+        background: #ecfdf5;
+        padding: 12px 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-left: 3px solid #10b981;
+    }
+    
+    .info-box i {
+        color: #10b981;
+        font-size: 16px;
+    }
+    
+    .info-box span {
+        font-size: 12px;
+        color: #065f46;
+    }
+    
+    /* Buttons */
+    .btn-update {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .btn-update:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+    }
+    
+    .btn-back {
+        background: #f1f5f9;
+        color: #475569;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: 0.3s;
+        width: 100%;
+        margin-top: 12px;
+    }
+    
+    .btn-back:hover {
+        background: #e2e8f0;
+        transform: translateY(-2px);
+        color: #1e293b;
+    }
+    
+    .text-muted {
+        color: #94a3b8;
+        font-size: 11px;
+        margin-top: 5px;
+        display: block;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+        .sidebar {
+            width: 70px;
+            padding: 20px 10px;
+        }
+        
+        .sidebar .logo {
+            font-size: 0;
+        }
+        
+        .sidebar .logo i {
+            font-size: 20px;
+        }
+        
+        .sidebar .nav-link span {
+            display: none;
+        }
+        
+        .sidebar .nav-link {
+            justify-content: center;
+            padding: 12px;
+        }
+        
+        .sidebar .nav-link i {
+            margin: 0;
+        }
+        
+        .sidebar-footer .nav-link span {
+            display: none;
+        }
+        
+        .main {
+            margin-left: 70px;
+        }
+        
+        .topbar {
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .card-body {
+            padding: 20px;
+        }
+        
+        .profile-img, .profile-placeholder {
+            width: 80px;
+            height: 80px;
+        }
+        
+        .profile-placeholder i {
+            font-size: 40px;
+        }
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #10b981;
+        border-radius: 10px;
+    }
+</style>
+
+<script>
+function validateForm() {
+    let name = document.getElementById('name').value.trim();
+    let email = document.getElementById('email').value.trim();
+    let phone = document.getElementById('phone').value.trim();
+    
+    if (name === "") {
+        alert('❌ Please enter your name!');
+        return false;
+    }
+    
+    if (email === "") {
+        alert('❌ Please enter your email!');
+        return false;
+    }
+    
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        alert('❌ Please enter a valid email address!');
+        return false;
+    }
+    
+    if (phone !== "") {
+        let phonePattern = /^[0-9]{10}$/;
+        if (!phonePattern.test(phone)) {
+            alert('❌ Phone number must be 10 digits!');
+            return false;
+        }
+    }
+    
+    return true;
+}
+</script>
+
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="logo">
+        <i class="fas fa-graduation-cap"></i> Elite University
+    </div>
+    
+    <div class="nav-item">
+        <a href="/student-dashboard" class="nav-link">
+            <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+        </a>
+    </div>
+    <div class="nav-item">
+        <a href="/student-profile" class="nav-link">
+            <i class="fas fa-user"></i> <span>My Profile</span>
+        </a>
+    </div>
+    <div class="nav-item">
+        <a href="/student-edit" class="nav-link active">
+            <i class="fas fa-edit"></i> <span>Edit Profile</span>
+        </a>
+    </div>
+    
+    <div class="sidebar-footer">
+        <div class="nav-item">
+            <a href="/logout" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <h4><i class="fas fa-user-edit"></i> Edit Profile</h4>
+        <div class="student-badge">
+            <i class="fas fa-id-card"></i> Update Information
+        </div>
+    </div>
+
+    <!-- Edit Profile Card -->
+    <div class="profile-card">
+        <div class="card-header">
+            <h4><i class="fas fa-user-edit"></i> Edit Profile</h4>
+            <p>Update your personal information</p>
+        </div>
+        
+        <div class="card-body">
+            
+            <div class="profile-image-container">
+                {% if student['photo'] and student['photo'] != 'default.png' %}
+                    <img src="{{ url_for('static', filename='uploads/' + student['photo']) }}" class="profile-img" alt="Profile Photo">
+                {% else %}
+                    <div class="profile-placeholder">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i>
+                <span>Update your profile photo and personal details below</span>
+            </div>
+            
+            <form method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ student['name'] }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" name="email" id="email" class="form-control" value="{{ student['email'] }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-phone-alt"></i> Phone Number</label>
+                    <input type="tel" name="phone" id="phone" class="form-control" value="{{ student['phone'] }}" placeholder="10-digit mobile number">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-camera"></i> Profile Photo</label>
+                    <input type="file" name="photo" class="form-control file-input" accept="image/*">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle"></i> Leave empty to keep current photo
+                    </small>
+                </div>
+                
+                <button type="submit" class="btn-update">
+                    <i class="fas fa-save"></i> Update Profile
+                </button>
+                
+                <a href="/student-dashboard" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

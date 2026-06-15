@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Student | College Management System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f4f6f9;
+    }
+    
+    /* ================= SIDEBAR ================= */
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        position: fixed;
+        background: linear-gradient(180deg, #1a1a2e, #16213e);
+        color: white;
+        padding: 25px 20px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+    }
+    
+    .sidebar .logo {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .sidebar .logo i {
+        color: #4CAF50;
+        margin-right: 8px;
+    }
+    
+    .sidebar a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #ccc;
+        text-decoration: none;
+        padding: 12px 15px;
+        margin: 5px 0;
+        border-radius: 10px;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+    
+    .sidebar a i {
+        width: 22px;
+        font-size: 16px;
+    }
+    
+    .sidebar a:hover {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        transform: translateX(5px);
+    }
+    
+    /* ================= MAIN CONTENT ================= */
+    .main-content {
+        margin-left: 260px;
+        padding: 40px;
+    }
+    
+    /* ================= CARD ================= */
+    .card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        border: 1px solid #eee;
+        max-width: 600px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        padding: 18px 25px;
+        font-weight: 600;
+        font-size: 16px;
+    }
+    
+    .card-header i {
+        margin-right: 8px;
+    }
+    
+    .card-body {
+        padding: 25px;
+    }
+    
+    /* Form Groups */
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        font-size: 13px;
+        color: #333;
+    }
+    
+    .form-group label i {
+        margin-right: 6px;
+        color: #4CAF50;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+    
+    .form-control:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 5px rgba(76,175,80,0.3);
+        outline: none;
+    }
+    
+    /* Info Box */
+    .info-box {
+        background: #e8f5e9;
+        padding: 12px 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 13px;
+        color: #2E7D32;
+    }
+    
+    .info-box i {
+        margin-right: 8px;
+    }
+    
+    /* Buttons */
+    .btn-update {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        width: 100%;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+    
+    .btn-update:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .btn-cancel {
+        background: #666;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        transition: 0.3s;
+    }
+    
+    .btn-cancel:hover {
+        background: #555;
+        transform: scale(1.02);
+    }
+    
+    .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .button-group .btn-update {
+        flex: 2;
+        margin-top: 0;
+    }
+    
+    .button-group .btn-cancel {
+        flex: 1;
+        text-align: center;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 70px;
+            padding: 20px 10px;
+        }
+        
+        .sidebar .logo {
+            font-size: 0;
+        }
+        
+        .sidebar .logo i {
+            font-size: 20px;
+        }
+        
+        .sidebar a span {
+            display: none;
+        }
+        
+        .sidebar a {
+            justify-content: center;
+            padding: 12px;
+        }
+        
+        .sidebar a i {
+            margin: 0;
+        }
+        
+        .main-content {
+            margin-left: 70px;
+            padding: 20px;
+        }
+        
+        .card {
+            margin: 0;
+        }
+        
+        .button-group {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<script>
+function validateForm() {
+    let name = document.getElementById('name').value.trim();
+    let roll = document.getElementById('roll_no').value.trim();
+    let course = document.getElementById('course').value.trim();
+    let semester = document.getElementById('semester').value.trim();
+    let email = document.getElementById('email').value.trim();
+    let phone = document.getElementById('phone').value.trim();
+    
+    if (name === "") {
+        alert('❌ Please enter student name!');
+        return false;
+    }
+    
+    if (roll === "") {
+        alert('❌ Please enter roll number!');
+        return false;
+    }
+    
+    if (course === "") {
+        alert('❌ Please enter course name!');
+        return false;
+    }
+    
+    if (semester === "") {
+        alert('❌ Please enter semester!');
+        return false;
+    }
+    
+    let semNum = parseInt(semester);
+    if (isNaN(semNum) || semNum < 1 || semNum > 8) {
+        alert('❌ Semester must be between 1 and 8!');
+        return false;
+    }
+    
+    if (email !== "") {
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert('❌ Please enter a valid email address!');
+            return false;
+        }
+    }
+    
+    if (phone !== "") {
+        let phonePattern = /^[0-9]{10}$/;
+        if (!phonePattern.test(phone)) {
+            alert('❌ Phone number must be 10 digits!');
+            return false;
+        }
+    }
+    
+    return true;
+}
+</script>
+
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="logo">
+        <i class="fas fa-graduation-cap"></i> EduTrack
+    </div>
+    
+    <a href="/dashboard">
+        <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+    </a>
+    <a href="/students" class="active">
+        <i class="fas fa-users"></i> <span>Students</span>
+    </a>
+    <a href="/subjects">
+        <i class="fas fa-book"></i> <span>Subjects</span>
+    </a>
+    <a href="/attendance">
+        <i class="fas fa-calendar-check"></i> <span>Attendance</span>
+    </a>
+    <a href="/add-marks">
+        <i class="fas fa-plus-circle"></i> <span>Marks</span>
+    </a>
+    <a href="/fees">
+        <i class="fas fa-rupee-sign"></i> <span>Fees</span>
+    </a>
+    <a href="/logout">
+        <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+    </a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-user-edit"></i> Edit Student Information
+        </div>
+        <div class="card-body">
+            
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i> 
+                Editing profile of <strong>{{ student['name'] }}</strong> (Roll No: {{ student['roll_no'] }})
+            </div>
+            
+            <form method="POST" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" name="name" id="name" value="{{ student['name'] }}" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-id-card"></i> Roll Number</label>
+                    <input type="text" name="roll_no" id="roll_no" value="{{ student['roll_no'] }}" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-graduation-cap"></i> Course</label>
+                    <input type="text" name="course" id="course" value="{{ student['course'] }}" class="form-control" required placeholder="e.g., B.Tech, BCA, MBA">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-layer-group"></i> Semester</label>
+                    <input type="number" name="semester" id="semester" value="{{ student['semester'] }}" class="form-control" required min="1" max="8">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" name="email" id="email" value="{{ student['email'] }}" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-phone-alt"></i> Phone Number</label>
+                    <input type="tel" name="phone" id="phone" value="{{ student['phone'] }}" class="form-control" placeholder="10-digit mobile number">
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit" class="btn-update">
+                        <i class="fas fa-save"></i> Update Student
+                    </button>
+                    <a href="/students" class="btn-cancel">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

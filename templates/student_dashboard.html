@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard | Elite University</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        background: #f5f7fa;
+        color: #1e293b;
+        min-height: 100vh;
+        font-size: 14px;
+    }
+    
+    /* ================= SIDEBAR ================= */
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        position: fixed;
+        background: linear-gradient(180deg, #1a1a2e, #16213e);
+        color: white;
+        padding: 25px 20px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+    }
+    
+    .sidebar .logo {
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .sidebar .logo i {
+        color: #10b981;
+        margin-right: 8px;
+    }
+    
+    .sidebar .nav-item {
+        margin: 5px 0;
+    }
+    
+    .sidebar .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #ccc;
+        text-decoration: none;
+        padding: 12px 15px;
+        border-radius: 10px;
+        transition: 0.3s;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    
+    .sidebar .nav-link i {
+        width: 22px;
+        font-size: 15px;
+    }
+    
+    .sidebar .nav-link:hover {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        transform: translateX(5px);
+    }
+    
+    .sidebar .nav-link.active {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+    }
+    
+    .sidebar-footer {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    /* ================= MAIN ================= */
+    .main {
+        margin-left: 260px;
+        padding: 25px;
+        min-height: 100vh;
+    }
+    
+    /* Topbar */
+    .topbar {
+        background: white;
+        padding: 15px 25px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .topbar h4 {
+        margin: 0;
+        color: #1e293b;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    
+    .topbar h4 i {
+        color: #10b981;
+        margin-right: 8px;
+    }
+    
+    .topbar small {
+        color: #64748b;
+        font-size: 12px;
+    }
+    
+    .student-badge {
+        background: #10b981;
+        padding: 6px 16px;
+        border-radius: 20px;
+        color: white;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
+    /* Stat Cards */
+    .stat-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        text-align: center;
+        transition: 0.3s;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    
+    .stat-card i {
+        font-size: 28px;
+        color: #10b981;
+        margin-bottom: 10px;
+    }
+    
+    .stat-card h6 {
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+    }
+    
+    .stat-card h2 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0;
+    }
+    
+    /* Section Cards */
+    .section-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        border: 1px solid #e2e8f0;
+    }
+    
+    .section-card h5 {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #10b981;
+    }
+    
+    .section-card h5 i {
+        color: #10b981;
+        margin-right: 8px;
+    }
+    
+    /* Tables */
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+    }
+    
+    .custom-table thead th {
+        background: #f8fafc;
+        color: #475569;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 12px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .custom-table tbody td {
+        padding: 12px;
+        color: #334155;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .custom-table tbody tr:hover {
+        background: #f8fafc;
+    }
+    
+    /* Badges */
+    .badge-success {
+        background: #dcfce7;
+        color: #166534;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .badge-danger {
+        background: #fee2e2;
+        color: #991b1b;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    /* Progress Bar */
+    .progress {
+        height: 6px;
+        border-radius: 10px;
+        background: #e2e8f0;
+        overflow: hidden;
+    }
+    
+    .progress-bar {
+        border-radius: 10px;
+    }
+    
+    .progress-bar.bg-success { background: #10b981; }
+    .progress-bar.bg-warning { background: #f59e0b; }
+    .progress-bar.bg-danger { background: #ef4444; }
+    
+    /* Chart Container */
+    .chart-container {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        border: 1px solid #e2e8f0;
+    }
+    
+    .chart-container h5 {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .chart-container h5 i {
+        color: #10b981;
+        margin-right: 8px;
+    }
+    
+    .chart-box {
+        max-width: 250px;
+        margin: 0 auto;
+    }
+    
+    /* Grade Colors */
+    .grade-aplus { color: #10b981; }
+    .grade-a { color: #3b82f6; }
+    .grade-b { color: #f59e0b; }
+    .grade-c { color: #f97316; }
+    .grade-f { color: #ef4444; }
+    
+    /* Sections */
+    .section {
+        display: none;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .section.active {
+        display: block;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+        .sidebar {
+            width: 70px;
+            padding: 20px 10px;
+        }
+        
+        .sidebar .logo {
+            font-size: 0;
+        }
+        
+        .sidebar .logo i {
+            font-size: 20px;
+        }
+        
+        .sidebar .nav-link span {
+            display: none;
+        }
+        
+        .sidebar .nav-link {
+            justify-content: center;
+            padding: 12px;
+        }
+        
+        .sidebar .nav-link i {
+            margin: 0;
+        }
+        
+        .sidebar-footer .nav-link span {
+            display: none;
+        }
+        
+        .main {
+            margin-left: 70px;
+        }
+        
+        .topbar {
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #10b981;
+        border-radius: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="logo">
+        <i class="fas fa-graduation-cap"></i> Elite University
+    </div>
+    
+    <div class="nav-item">
+        <a onclick="showSection('dashboard')" class="nav-link active">
+            <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+        </a>
+    </div>
+    <div class="nav-item">
+        <a onclick="showSection('attendance')" class="nav-link">
+            <i class="fas fa-calendar-check"></i> <span>Attendance</span>
+        </a>
+    </div>
+    <div class="nav-item">
+        <a onclick="showSection('marks')" class="nav-link">
+            <i class="fas fa-chart-line"></i> <span>Marks</span>
+        </a>
+    </div>
+    <div class="nav-item">
+        <a href="/student-profile" class="nav-link">
+            <i class="fas fa-user"></i> <span>My Profile</span>
+        </a>
+    </div>
+    
+    <div class="sidebar-footer">
+        <div class="nav-item">
+            <a href="/logout" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <h4><i class="fas fa-chalkboard-user"></i> Student Dashboard</h4>
+        <div class="student-badge">
+            <i class="fas fa-user-graduate"></i> {{ session['student_name'] }}
+        </div>
+    </div>
+
+    <!-- DASHBOARD SECTION -->
+    <div id="dashboard" class="section active">
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h6>Overall Attendance</h6>
+                    <h2>{{ percent }}%</h2>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h6>Average Marks</h6>
+                    <h2>{{ avg_percent }}%</h2>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="stat-card">
+                    <i class="fas fa-medal"></i>
+                    <h6>Current Grade</h6>
+                    <h2 class="
+                        {% if avg_percent >= 90 %}grade-aplus
+                        {% elif avg_percent >= 75 %}grade-a
+                        {% elif avg_percent >= 60 %}grade-b
+                        {% elif avg_percent >= 40 %}grade-c
+                        {% else %}grade-f
+                        {% endif %}
+                    ">
+                        {% if avg_percent >= 90 %} A+
+                        {% elif avg_percent >= 75 %} A
+                        {% elif avg_percent >= 60 %} B
+                        {% elif avg_percent >= 40 %} C
+                        {% else %} F
+                        {% endif %}
+                    </h2>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h5><i class="fas fa-chart-pie"></i> Attendance Overview</h5>
+            <div class="chart-box">
+                <canvas id="attendanceChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ATTENDANCE SECTION -->
+    <div id="attendance" class="section">
+        <div class="section-card">
+            <h5><i class="fas fa-book-open"></i> Subject-wise Attendance</h5>
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr><th>Subject</th><th>Present</th><th>Total Classes</th><th>Percentage</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for s in subject_data %}
+                        {% set att_percent = (s[1]/s[2]*100) %}
+                        <tr>
+                            <td><strong>{{ s[0] }}</strong></td>
+                            <td>{{ s[1] }}</td>
+                            <td>{{ s[2] }}</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress" style="width: 100px;">
+                                        <div class="progress-bar {% if att_percent >= 75 %}bg-success{% elif att_percent >= 40 %}bg-warning{% else %}bg-danger{% endif %}" style="width: {{ att_percent }}%"></div>
+                                    </div>
+                                    <span>{{ att_percent | round(1) }}%</span>
+                                </div>
+                             </td>
+                         </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="section-card">
+            <h5><i class="fas fa-history"></i> Recent Attendance</h5>
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr><th>Subject</th><th>Date</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for r in recent %}
+                        <tr>
+                            <td><strong>{{ r[0] }}</strong></td>
+                            <td>{{ r[1] }}</td>
+                            <td>{% if r[2]=='Present' %}<span class="badge-success"><i class="fas fa-check-circle"></i> Present</span>{% else %}<span class="badge-danger"><i class="fas fa-times-circle"></i> Absent</span>{% endif %}</td>
+                         </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- MARKS SECTION -->
+    <div id="marks" class="section">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="stat-card">
+                    <i class="fas fa-chart-simple"></i>
+                    <h6>Total Marks</h6>
+                    <h2>{{ total_marks }}<span style="font-size: 14px; color:#64748b;">/{{ total_max }}</span></h2>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="stat-card">
+                    <i class="fas fa-percent"></i>
+                    <h6>Percentage</h6>
+                    <h2>{{ avg_percent }}%</h2>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-card">
+            <h5><i class="fas fa-chart-line"></i> Subject Performance</h5>
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr><th>Subject</th><th>Marks</th><th>Progress</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for m in marks %}
+                        {% set p = (m[1] / m[2]) * 100 %}
+                        <tr>
+                            <td><strong>{{ m[0] }}</strong></td>
+                            <td>{{ m[1] }}/{{ m[2] }}</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress" style="width: 120px;">
+                                        <div class="progress-bar {% if p >= 75 %}bg-success{% elif p >= 40 %}bg-warning{% else %}bg-danger{% endif %}" style="width: {{ p }}%"></div>
+                                    </div>
+                                    <span>{{ p | round(1) }}%</span>
+                                </div>
+                             </td>
+                         </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h5><i class="fas fa-chart-bar"></i> Marks Chart</h5>
+            <canvas id="marksChart"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function showSection(id){
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.sidebar .nav-link').forEach(link => link.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+}
+
+// Attendance Chart
+const ctx1 = document.getElementById('attendanceChart');
+if(ctx1) {
+    new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: ['Present', 'Absent'],
+            datasets: [{
+                data: [{{ percent }}, {{ 100 - percent }}],
+                backgroundColor: ['#10b981', '#ef4444'],
+                borderWidth: 0,
+                hoverOffset: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            cutout: '60%',
+            plugins: {
+                legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } }
+            }
+        }
+    });
+}
+
+// Marks Chart
+const ctx2 = document.getElementById('marksChart');
+if(ctx2) {
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: [{% for m in marks %}'{{ m[0] }}',{% endfor %}],
+            datasets: [{
+                label: 'Marks',
+                data: [{% for m in marks %}{{ m[1] }},{% endfor %}],
+                backgroundColor: '#10b981',
+                borderRadius: 6,
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: { legend: { position: 'top', labels: { font: { size: 10 } } } },
+            scales: { y: { beginAtZero: true, grid: { color: '#e2e8f0' } }, x: { grid: { display: false } } }
+        }
+    });
+}
+</script>
+
+</body>
+</html>

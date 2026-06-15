@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Marks | College Management System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f4f6f9;
+    }
+    
+    /* ================= SIDEBAR ================= */
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        position: fixed;
+        background: linear-gradient(180deg, #1a1a2e, #16213e);
+        color: white;
+        padding: 25px 20px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+    }
+    
+    .sidebar .logo {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .sidebar .logo i {
+        color: #4CAF50;
+        margin-right: 8px;
+    }
+    
+    .sidebar a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #ccc;
+        text-decoration: none;
+        padding: 12px 15px;
+        margin: 5px 0;
+        border-radius: 10px;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+    
+    .sidebar a i {
+        width: 22px;
+        font-size: 16px;
+    }
+    
+    .sidebar a:hover {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        transform: translateX(5px);
+    }
+    
+    .sidebar a.active {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+    }
+    
+    /* ================= MAIN CONTENT ================= */
+    .main-content {
+        margin-left: 260px;
+        padding: 40px;
+    }
+    
+    /* ================= CARD ================= */
+    .card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        border: 1px solid #eee;
+        max-width: 550px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        padding: 18px 25px;
+        font-weight: 600;
+        font-size: 16px;
+    }
+    
+    .card-header i {
+        margin-right: 8px;
+    }
+    
+    .card-body {
+        padding: 25px;
+    }
+    
+    /* Form Groups */
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        font-size: 13px;
+        color: #333;
+    }
+    
+    .form-group label i {
+        margin-right: 6px;
+        color: #4CAF50;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+    
+    .form-control:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 5px rgba(76,175,80,0.3);
+        outline: none;
+    }
+    
+    /* Progress Bar */
+    .progress-preview {
+        margin-top: 15px;
+        padding: 12px;
+        background: #f5f5f5;
+        border-radius: 8px;
+        text-align: center;
+    }
+    
+    .progress {
+        height: 8px;
+        border-radius: 10px;
+        background: #e0e0e0;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+    
+    .progress-bar {
+        border-radius: 10px;
+        transition: width 0.3s ease;
+    }
+    
+    .progress-bar.bg-success { background: linear-gradient(90deg, #4CAF50, #66BB6A); }
+    .progress-bar.bg-warning { background: linear-gradient(90deg, #ff9800, #ffb74d); }
+    .progress-bar.bg-danger { background: linear-gradient(90deg, #f44336, #ef5350); }
+    
+    .percent-text {
+        font-size: 14px;
+        font-weight: 600;
+    }
+    
+    /* Buttons */
+    .btn-update {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        width: 100%;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+    
+    .btn-update:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .btn-cancel {
+        background: #666;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        transition: 0.3s;
+    }
+    
+    .btn-cancel:hover {
+        background: #555;
+        transform: scale(1.02);
+    }
+    
+    .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .button-group .btn-update {
+        flex: 2;
+        margin-top: 0;
+    }
+    
+    .button-group .btn-cancel {
+        flex: 1;
+        text-align: center;
+    }
+    
+    /* Info Box */
+    .info-box {
+        background: #e8f5e9;
+        padding: 12px 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 13px;
+        color: #2E7D32;
+    }
+    
+    .info-box i {
+        margin-right: 8px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 70px;
+            padding: 20px 10px;
+        }
+        
+        .sidebar .logo {
+            font-size: 0;
+        }
+        
+        .sidebar .logo i {
+            font-size: 20px;
+        }
+        
+        .sidebar a span {
+            display: none;
+        }
+        
+        .sidebar a {
+            justify-content: center;
+            padding: 12px;
+        }
+        
+        .sidebar a i {
+            margin: 0;
+        }
+        
+        .main-content {
+            margin-left: 70px;
+            padding: 20px;
+        }
+        
+        .card {
+            margin: 0;
+        }
+        
+        .button-group {
+            flex-direction: column;
+        }
+    }
+</style>
+
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="logo">
+        <i class="fas fa-graduation-cap"></i> EduTrack
+    </div>
+    
+    <a href="/dashboard">
+        <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+    </a>
+    <a href="/students">
+        <i class="fas fa-users"></i> <span>Students</span>
+    </a>
+    <a href="/subjects">
+        <i class="fas fa-book"></i> <span>Subjects</span>
+    </a>
+    <a href="/attendance">
+        <i class="fas fa-calendar-check"></i> <span>Attendance</span>
+    </a>
+    <a href="/add-marks" class="active">
+        <i class="fas fa-plus-circle"></i> <span>Marks</span>
+    </a>
+    <a href="/fees">
+        <i class="fas fa-rupee-sign"></i> <span>Fees</span>
+    </a>
+    <a href="/logout">
+        <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+    </a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-edit"></i> Edit Marks Record
+        </div>
+        <div class="card-body">
+            
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i> 
+                Updating marks for <strong>{{ m['subject'] }}</strong>
+            </div>
+            
+            <form method="POST" onsubmit="return validateMarks()">
+                <div class="form-group">
+                    <label><i class="fas fa-book"></i> Subject Name</label>
+                    <input type="text" name="subject" id="subject" value="{{ m['subject'] }}" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-star"></i> Marks Obtained</label>
+                    <input type="number" name="marks" id="marks" value="{{ m['marks'] }}" class="form-control" required min="0" oninput="calculatePercentage()">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-flag-checkered"></i> Total Marks</label>
+                    <input type="number" name="total" id="total" value="{{ m['total'] }}" class="form-control" required min="1" oninput="calculatePercentage()">
+                </div>
+                
+                <!-- Live Percentage Preview -->
+                <div class="progress-preview" id="previewBox">
+                    <div class="progress">
+                        <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="percent-text" id="percentText">
+                        <i class="fas fa-percent"></i> Percentage: 0%
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit" class="btn-update">
+                        <i class="fas fa-save"></i> Update Marks
+                    </button>
+                    <a href="/add-marks" class="btn-cancel">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function calculatePercentage() {
+    let marks = parseFloat(document.getElementById('marks').value);
+    let total = parseFloat(document.getElementById('total').value);
+    
+    if (!isNaN(marks) && !isNaN(total) && total > 0) {
+        let percent = (marks / total) * 100;
+        let percentFixed = percent.toFixed(1);
+        
+        // Update progress bar
+        let progressBar = document.getElementById('progressBar');
+        progressBar.style.width = percent + '%';
+        document.getElementById('percentText').innerHTML = '<i class="fas fa-percent"></i> Percentage: ' + percentFixed + '%';
+        
+        // Change color based on percentage
+        if (percent >= 75) {
+            progressBar.className = 'progress-bar bg-success';
+        } else if (percent >= 40) {
+            progressBar.className = 'progress-bar bg-warning';
+        } else {
+            progressBar.className = 'progress-bar bg-danger';
+        }
+    } else {
+        document.getElementById('progressBar').style.width = '0%';
+        document.getElementById('percentText').innerHTML = '<i class="fas fa-percent"></i> Percentage: 0%';
+    }
+}
+
+function validateMarks() {
+    let marks = parseFloat(document.getElementById('marks').value);
+    let total = parseFloat(document.getElementById('total').value);
+    
+    if (marks > total) {
+        alert('❌ Marks cannot be greater than total marks!');
+        return false;
+    }
+    if (marks < 0) {
+        alert('❌ Marks cannot be negative!');
+        return false;
+    }
+    if (total <= 0) {
+        alert('❌ Total marks must be greater than 0!');
+        return false;
+    }
+    return true;
+}
+
+// Calculate on page load
+window.onload = function() {
+    calculatePercentage();
+};
+</script>
+
+</body>
+</html>

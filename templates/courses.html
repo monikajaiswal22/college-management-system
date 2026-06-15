@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Courses | Elite University | Academic Programs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Explore our wide range of undergraduate and postgraduate programs at Elite University">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+        
+        :root {
+            --green-deep: #047857;
+            --green-primary: #10b981;
+            --green-soft: #34d399;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-900: #0f172a;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        }
+        
+        .container {
+            width: 100%;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (min-width: 640px) { .container { max-width: 640px; } }
+        @media (min-width: 768px) { .container { max-width: 768px; padding-left: 1.5rem; padding-right: 1.5rem; } }
+        @media (min-width: 1024px) { .container { max-width: 1024px; } }
+        @media (min-width: 1280px) { .container { max-width: 1200px; } }
+        
+        /* Navbar - Fixed for mobile dropdown */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 0.85rem 0;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--gray-900) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .navbar-brand i {
+            color: var(--green-primary);
+            font-size: 1.6rem;
+        }
+        
+        .navbar-toggler {
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 0.5rem 0.75rem;
+        }
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+            outline: none;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--gray-600) !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            margin: 0 2px;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--green-primary) !important;
+            background: rgba(16, 185, 129, 0.08);
+        }
+        
+        /* FIXED: Mobile dropdown styling */
+        @media (max-width: 991.98px) {
+            .dropdown-menu {
+                border: none;
+                background: transparent;
+                box-shadow: none;
+                padding-left: 1.25rem;
+                margin-top: 0;
+                position: static !important;
+                transform: none !important;
+                width: 100%;
+            }
+            .dropdown-menu.show {
+                display: block;
+                background: rgba(241, 245, 249, 0.6);
+                border-radius: 12px;
+                margin-top: 0.25rem;
+            }
+            .dropdown-item {
+                color: var(--gray-700);
+                padding: 0.6rem 1rem 0.6rem 2rem;
+                font-size: 0.85rem;
+            }
+            .dropdown-item i {
+                width: 1.5rem;
+                margin-right: 0.5rem;
+            }
+            .dropdown-toggle::after {
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .nav-item.dropdown {
+                position: relative;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .dropdown-menu {
+                border: 1px solid var(--gray-200);
+                border-radius: 16px;
+                padding: 0.5rem 0;
+                margin-top: 0.5rem;
+                box-shadow: var(--shadow-md);
+                background: var(--white);
+                position: absolute;
+            }
+        }
+        
+        .dropdown-menu {
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            box-shadow: var(--shadow-md);
+            background: var(--white);
+        }
+        .dropdown-item {
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.6rem 1.5rem;
+            color: var(--gray-700);
+            transition: all 0.2s;
+        }
+        .dropdown-item:hover {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--green-primary);
+        }
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .page-header { padding: 4.5rem 1rem; }
+        }
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #064e3b, #059669);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        @media (min-width: 768px) {
+            .page-header h1 { font-size: 3rem; }
+        }
+        .page-header p {
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--gray-600);
+        }
+        @media (min-width: 768px) {
+            .page-header p { font-size: 1.1rem; }
+        }
+        
+        /* Course Cards */
+        .course-card {
+            background: var(--white);
+            border-radius: 1.25rem;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+            height: 100%;
+            box-shadow: var(--shadow-sm);
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--green-primary);
+            box-shadow: var(--shadow-lg);
+        }
+        .course-card i {
+            font-size: 2.5rem;
+            color: var(--green-primary);
+            margin-bottom: 1rem;
+        }
+        .course-card h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.75rem;
+        }
+        .course-card p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+        .course-card small {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--green-primary);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        /* Info Cards */
+        .info-card {
+            background: linear-gradient(135deg, var(--green-primary), var(--green-deep));
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+            height: 100%;
+            box-shadow: var(--shadow-md);
+        }
+        .info-card i {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .info-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        .info-card p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 0;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        .footer h5 {
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .footer a:hover {
+            color: var(--green-soft);
+            padding-left: 4px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+        .social-icons a:hover {
+            background: var(--green-primary);
+            transform: translateY(-3px);
+            color: white;
+            padding-left: 0;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.75rem;
+        }
+        
+        @media (max-width: 768px) {
+            .footer .row > div { margin-bottom: 2rem; }
+        }
+        
+        /* Animations */
+        .animate-once {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .animate-once.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--green-primary);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation with FIXED mobile dropdown -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Elite University</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/courses"><i class="fas fa-book"></i> Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admission"><i class="fas fa-arrow-right"></i> Admission</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                <!-- FIXED: Login Dropdown with proper attributes -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                        <li><a class="dropdown-item" href="/admin-login"><i class="fas fa-user-shield me-2"></i> Admin Login</a></li>
+                        <li><a class="dropdown-item" href="/teacher-login"><i class="fas fa-chalkboard-user me-2"></i> Teacher Login</a></li>
+                        <li><a class="dropdown-item" href="/student-login"><i class="fas fa-user-graduate me-2"></i> Student Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Our Academic Programs</h1>
+        <p>Choose from a wide range of undergraduate and postgraduate programs designed for future leaders</p>
+    </div>
+</section>
+
+<!-- Courses Section -->
+<div class="container py-4">
+    <div class="row g-4">
+        <!-- B.Tech -->
+        <div class="col-md-6 col-lg-4">
+            <div class="course-card animate-once">
+                <i class="fas fa-microchip"></i>
+                <h4>B.Tech (CSE/AI/DS)</h4>
+                <p>Computer Science • Artificial Intelligence & ML • Data Science • Cloud Computing • Cyber Security</p>
+                <small>4 Years | Full Time | AICTE Approved</small>
+            </div>
+        </div>
+        
+        <!-- MBA -->
+        <div class="col-md-6 col-lg-4">
+            <div class="course-card animate-once">
+                <i class="fas fa-chart-line"></i>
+                <h4>MBA</h4>
+                <p>Marketing • Finance • Human Resources • International Business • Business Analytics</p>
+                <small>2 Years | Full Time | AACSB Accredited</small>
+            </div>
+        </div>
+        
+        <!-- MCA -->
+        <div class="col-md-6 col-lg-4">
+            <div class="course-card animate-once">
+                <i class="fas fa-code"></i>
+                <h4>MCA</h4>
+                <p>Web Development • Mobile App Development • Cyber Security • Cloud Computing</p>
+                <small>2 Years | Full Time | AICTE Approved</small>
+            </div>
+        </div>
+        
+        <!-- B.Com -->
+        <div class="col-md-6 col-lg-4">
+            <div class="course-card animate-once">
+                <i class="fas fa-calculator"></i>
+                <h4>B.Com (Hons)</h4>
+                <p>Accounting • Finance • Taxation • Banking & Insurance • Corporate Law</p>
+                <small>3 Years | Full Time | UGC Recognized</small>
+            </div>
+        </div>
+        
+        <!-- M.Sc -->
+        <div class="col-md-6 col-lg-4">
+            <div class="course-card animate-once">
+                <i class="fas fa-flask"></i>
+                <h4>M.Sc</h4>
+                <p>Physics • Chemistry • Mathematics • Biotechnology • Environmental Science</p>
+                <small>2 Years | Full Time | Research Focused</small>
+            </div>
+        </div>
+        
+        <!-- LLB / LLM -->
+        <div class="col-md-6 col-lg-4">
+            <div class="course-card animate-once">
+                <i class="fas fa-gavel"></i>
+                <h4>LLB / LLM</h4>
+                <p>Corporate Law • Criminal Law • Constitutional Law • Intellectual Property Rights</p>
+                <small>3/2 Years | Full Time | BCI Approved</small>
+            </div>
+        </div>
+        
+        <!-- BCA -->
+        <div class="col-md-6 col-lg-4">
+            <div class="course-card animate-once">
+                <i class="fas fa-laptop"></i>
+                <h4>BCA</h4>
+                <p>Programming • Web Technologies • Database Management • Software Engineering</p>
+                <small>3 Years | Full Time | Industry Oriented</small>
+            </div>
+        </div>
+        
+        <!-- BBA -->
+        <div class="col-md-6 col-lg-4">
+            <div class="course-card animate-once">
+                <i class="fas fa-building"></i>
+                <h4>BBA</h4>
+                <p>Management • Entrepreneurship • Digital Marketing • Supply Chain</p>
+                <small>3 Years | Full Time | Dual Specialization</small>
+            </div>
+        </div>
+        
+        <!-- Ph.D -->
+        <div class="col-md-6 col-lg-4">
+            <div class="course-card animate-once">
+                <i class="fas fa-graduation-cap"></i>
+                <h4>Ph.D Programs</h4>
+                <p>Engineering • Management • Sciences • Law • Humanities</p>
+                <small>3-5 Years | Doctoral Research | UGC Approved</small>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Why Choose These Courses Section -->
+    <div class="row g-4 mt-4">
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card animate-once">
+                <i class="fas fa-chalkboard-user"></i>
+                <h4>Expert Faculty</h4>
+                <p>Learn from industry experts and PhD scholars</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card animate-once" style="background: linear-gradient(135deg, #059669, #047857);">
+                <i class="fas fa-flask"></i>
+                <h4>Modern Labs</h4>
+                <p>State-of-the-art research facilities</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card animate-once" style="background: linear-gradient(135deg, #10b981, #059669);">
+                <i class="fas fa-briefcase"></i>
+                <h4>100% Placement</h4>
+                <p>Top recruiters from industry</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card animate-once" style="background: linear-gradient(135deg, #34d399, #10b981);">
+                <i class="fas fa-globe"></i>
+                <h4>Global Exposure</h4>
+                <p>International collaborations</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-12 col-md-4">
+                <h5><i class="fas fa-university me-2"></i> Elite University</h5>
+                <p>123 Education Street, Knowledge City<br>PIN: 110001, New Delhi, India</p>
+                <p><i class="fas fa-phone-alt me-2"></i> +91 1234567890<br><i class="fas fa-envelope me-2"></i> info@eliteuniversity.edu</p>
+            </div>
+            <div class="col-6 col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="/about"><i class="fas fa-chevron-right fa-xs me-1"></i> About Us</a></li>
+                    <li class="mb-2"><a href="/courses"><i class="fas fa-chevron-right fa-xs me-1"></i> Courses</a></li>
+                    <li class="mb-2"><a href="/admission"><i class="fas fa-chevron-right fa-xs me-1"></i> Admission 2026</a></li>
+                    <li class="mb-2"><a href="/contact"><i class="fas fa-chevron-right fa-xs me-1"></i> Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-4">
+                <h5>Follow Us</h5>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                <h5 class="mt-4">Newsletter</h5>
+                <div class="d-flex gap-2 mt-2">
+                    <input type="email" class="form-control" style="background: #1e293b; border: 1px solid #334155; border-radius: 10px; color: white;" placeholder="Your Email">
+                    <button class="btn btn-success" style="background: #10b981; border: none; border-radius: 10px; padding: 0.5rem 1rem;">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Elite University. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #10b981;"></i> for Excellence</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    (function() {
+        // Intersection Observer for animations
+        const elements = document.querySelectorAll('.animate-once');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -10px 0px" });
+        
+        elements.forEach(el => observer.observe(el));
+        
+        // Initial check for visible elements
+        window.addEventListener('load', () => {
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 70) {
+                    el.classList.add('revealed');
+                    observer.unobserve(el);
+                }
+            });
+        });
+        
+        // FIXED: Mobile dropdown handling - prevents navbar collapse when clicking dropdown toggle
+        const dropdownToggle = document.querySelector('#loginDropdown');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        
+        if (dropdownToggle) {
+            dropdownToggle.addEventListener('click', function(e) {
+                // On mobile, prevent the navbar from collapsing when toggling dropdown
+                if (window.innerWidth < 992) {
+                    e.stopPropagation();
+                }
+            });
+        }
+        
+        // Close mobile menu when clicking on dropdown items
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth < 992 && navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                    if (bsCollapse) bsCollapse.hide();
+                }
+            });
+        });
+        
+        // Close navbar when clicking regular nav links
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 992 && navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                    if (bsCollapse) bsCollapse.hide();
+                }
+            });
+        });
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance | College Management System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f4f6f9;
+    }
+    
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        position: fixed;
+        background: linear-gradient(180deg, #1a1a2e, #16213e);
+        color: white;
+        padding: 25px 20px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+    }
+    
+    .sidebar .logo {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .sidebar .logo i {
+        color: #4CAF50;
+        margin-right: 8px;
+    }
+    
+    .sidebar a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #ccc;
+        text-decoration: none;
+        padding: 12px 15px;
+        margin: 5px 0;
+        border-radius: 10px;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+    
+    .sidebar a i {
+        width: 22px;
+        font-size: 16px;
+    }
+    
+    .sidebar a:hover {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        transform: translateX(5px);
+    }
+    
+    .sidebar a.active {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+    }
+    
+    .main-content {
+        margin-left: 260px;
+        padding: 25px;
+        min-height: 100vh;
+    }
+    
+    .card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        border: 1px solid #eee;
+        margin-bottom: 25px;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        padding: 15px 20px;
+        font-weight: 600;
+    }
+    
+    .card-header i {
+        margin-right: 8px;
+    }
+    
+    .card-body {
+        padding: 20px;
+    }
+    
+    .form-control, .form-select {
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        width: 100%;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: #4CAF50;
+        outline: none;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        border: none;
+        border-radius: 8px;
+        padding: 10px 18px;
+        color: white;
+        cursor: pointer;
+        width: 100%;
+    }
+    
+    .btn-primary:hover {
+        transform: scale(1.02);
+    }
+    
+    .radio-group {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .radio-pill {
+        padding: 6px 16px;
+        border-radius: 30px;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        transition: 0.2s;
+        background: white;
+        font-size: 13px;
+    }
+    
+    .radio-pill:hover {
+        border-color: #4CAF50;
+        background: #f0fdf4;
+    }
+    
+    .radio-pill input {
+        margin-right: 6px;
+    }
+    
+    .table-custom {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .table-custom thead th {
+        background: #1a1a2e;
+        color: white;
+        padding: 12px;
+        font-size: 13px;
+        text-align: left;
+    }
+    
+    .table-custom tbody td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+        vertical-align: middle;
+    }
+    
+    .table-custom tbody tr:hover {
+        background: #f5f5f5;
+    }
+    
+    .badge-success {
+        background: #e8f5e9;
+        color: #2E7D32;
+        padding: 5px 12px;
+        border-radius: 20px;
+        display: inline-block;
+    }
+    
+    .badge-danger {
+        background: #ffebee;
+        color: #c62828;
+        padding: 5px 12px;
+        border-radius: 20px;
+        display: inline-block;
+    }
+    
+    .badge-success i, .badge-danger i {
+        margin-right: 5px;
+    }
+    
+    .info-box {
+        background: #e8f5e9;
+        padding: 12px 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 4px solid #4CAF50;
+        color: #2E7D32;
+    }
+    
+    .chart-box {
+        max-width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+    
+    .percent-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #4CAF50;
+        margin-top: 10px;
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #999;
+    }
+    
+    .empty-state i {
+        font-size: 48px;
+        margin-bottom: 15px;
+        color: #ddd;
+    }
+    
+    .alert-warning {
+        background: #fff3e0;
+        padding: 30px;
+        text-align: center;
+        border-radius: 8px;
+        border-left: 4px solid #ff9800;
+    }
+    
+    .btn-sm {
+        padding: 4px 10px;
+        margin: 0 2px;
+        border-radius: 6px;
+        font-size: 12px;
+        transition: 0.2s;
+    }
+    
+    .btn-success { background: #4CAF50; border: none; color: white; }
+    .btn-warning { background: #ff9800; border: none; color: white; }
+    .btn-danger { background: #f44336; border: none; color: white; }
+    
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 70px;
+            padding: 20px 10px;
+        }
+        
+        .sidebar .logo {
+            font-size: 0;
+        }
+        
+        .sidebar .logo i {
+            font-size: 20px;
+        }
+        
+        .sidebar a span {
+            display: none;
+        }
+        
+        .sidebar a {
+            justify-content: center;
+            padding: 12px;
+        }
+        
+        .sidebar a i {
+            margin: 0;
+        }
+        
+        .main-content {
+            margin-left: 70px;
+            padding: 15px;
+        }
+        
+        .radio-group {
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .radio-pill {
+            display: inline-block;
+            width: auto;
+        }
+        
+        .table-custom {
+            font-size: 11px;
+        }
+        
+        .table-custom th,
+        .table-custom td {
+            padding: 8px;
+        }
+    }
+    
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #4CAF50;
+        border-radius: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">
+        <i class="fas fa-graduation-cap"></i> Elite University
+    </div>
+    
+    <a href="/dashboard">
+        <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+    </a>
+    <a href="/students">
+        <i class="fas fa-users"></i> <span>Students</span>
+    </a>
+    <a href="/subjects">
+        <i class="fas fa-book"></i> <span>Subjects</span>
+    </a>
+    <a href="/attendance" class="active">
+        <i class="fas fa-calendar-check"></i> <span>Attendance</span>
+    </a>
+    <a href="/add-marks">
+        <i class="fas fa-plus-circle"></i> <span>Add Marks</span>
+    </a>
+    <a href="/fees">
+        <i class="fas fa-rupee-sign"></i> <span>Fees</span>
+    </a>
+    <a href="/logout">
+        <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+    </a>
+</div>
+
+<div class="main-content">
+
+    <!-- MARK ATTENDANCE CARD -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-pen-alt"></i> Mark Attendance
+        </div>
+        <div class="card-body">
+            <form method="POST" id="attendanceForm">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label><i class="fas fa-calendar-alt"></i> Select Date</label>
+                        <input type="date" name="date" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label><i class="fas fa-book"></i> Select Subject</label>
+                        <select name="subject_id" class="form-select" onchange="this.form.submit()" required>
+                            <option value="">-- Select Subject --</option>
+                            {% for sub in subjects %}
+                            <option value="{{ sub['id'] }}" {% if selected_subject and selected_subject['id'] == sub['id'] %}selected{% endif %}>
+                                {{ sub['name'] }} ({{ sub['course'] }} - Sem {{ sub['semester'] }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                
+                {% if selected_subject %}
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i> 
+                    <strong>{{ selected_subject['name'] }}</strong> | 
+                    Course: {{ selected_subject['course'] }} | 
+                    Semester: {{ selected_subject['semester'] }} | 
+                    Students: <strong>{{ students|length }}</strong>
+                </div>
+                
+                {% if students|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Roll No</th>
+                                <th>Student Name</th>
+                                <th style="width: 250px;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in students %}
+                            <tr>
+                                <td>{{ s['roll_no'] }}</td>
+                                <td><strong>{{ s['name'] }}</strong></td>
+                                <td>
+                                    <div class="radio-group">
+                                        <label class="radio-pill">
+                                            <input type="radio" name="status_{{ s['id'] }}" value="Present" required>
+                                            <i class="fas fa-check-circle text-success"></i> Present
+                                        </label>
+                                        <label class="radio-pill">
+                                            <input type="radio" name="status_{{ s['id'] }}" value="Absent">
+                                            <i class="fas fa-times-circle text-danger"></i> Absent
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <button type="submit" class="btn-primary mt-3">
+                    <i class="fas fa-save"></i> Save Attendance
+                </button>
+                {% else %}
+                <div class="empty-state">
+                    <i class="fas fa-user-graduate"></i>
+                    <p>No students found. Please add students first.</p>
+                    <a href="/students" class="btn btn-sm btn-primary mt-2">Add Students</a>
+                </div>
+                {% endif %}
+                
+                {% else %}
+                <div class="alert-warning">
+                    <i class="fas fa-hand-pointer" style="font-size: 40px; color: #ff9800; margin-bottom: 10px; display: block;"></i>
+                    <h5>Please select a subject first</h5>
+                    <p class="text-muted">Select a subject from dropdown to mark attendance</p>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    <!-- ATTENDANCE OVERVIEW -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-chart-pie"></i> Attendance Overview
+        </div>
+        <div class="card-body text-center">
+            <div class="chart-box">
+                <canvas id="attendanceChart"></canvas>
+            </div>
+            <div class="percent-value">
+                <i class="fas fa-percent"></i> {{ attendance_percent }}% Overall
+            </div>
+        </div>
+    </div>
+
+    <!-- ATTENDANCE RECORDS -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-history"></i> Attendance Records
+        </div>
+        <div class="card-body">
+            {% if records|length > 0 %}
+            <div class="table-responsive">
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in records %}
+                        <tr>
+                            <td><strong>{{ a[1] }}</strong></td>
+                            <td>{{ a[2] }}</td>
+                            <td>{{ a[3] }}</td>
+                            <td>
+                                {% if a[4] == 'Present' %}
+                                    <span class="badge-success"><i class="fas fa-check-circle"></i> Present</span>
+                                {% else %}
+                                    <span class="badge-danger"><i class="fas fa-times-circle"></i> Absent</span>
+                                {% endif %}
+                              </td>
+                            <td>
+                                <a href="{{ url_for('update_attendance', id=a[0], status='Present') }}" class="btn btn-success btn-sm" title="Mark Present">
+                                    <i class="fas fa-check"></i>
+                                </a>
+                                <a href="{{ url_for('update_attendance', id=a[0], status='Absent') }}" class="btn btn-warning btn-sm" title="Mark Absent">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                                <a href="{{ url_for('delete_attendance', id=a[0]) }}" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Delete this record?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <i class="fas fa-calendar-alt"></i>
+                <p>No attendance records found</p>
+                <small>Mark attendance to see records here</small>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+<script>
+// Attendance Chart
+const ctx = document.getElementById('attendanceChart');
+if(ctx) {
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Present', 'Absent'],
+            datasets: [{
+                data: [{{ attendance_percent }}, {{ 100 - attendance_percent }}],
+                backgroundColor: ['#4CAF50', '#f44336'],
+                borderWidth: 0,
+                hoverOffset: 10
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            cutout: '65%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { font: { size: 11 } }
+                }
+            }
+        }
+    });
+}
+</script>
+
+</body>
+</html>
