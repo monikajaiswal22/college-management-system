@@ -49,7 +49,6 @@ It provides role-based access for administrators, teachers, and students, with f
 ### 🔐 Role-Based Authentication
 
 Separate access for:
-
 * Admin
 * Teacher
 * Student
@@ -66,7 +65,6 @@ Separate access for:
 ## 🛠️ Tech Stack
 
 ### Backend
-
 * Python
 * Flask
 
