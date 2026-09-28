@@ -144,4 +144,4 @@ Web Developer | Python | Flask | MySQL | HTML | CSS | JavaScript
 
 ---
 
-⭐ If you find this project useful, consider giving it a star!
+⭐ If you find this project useful, consider giving it a star.!
