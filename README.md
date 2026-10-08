@@ -5,7 +5,6 @@ A full-featured **College Management System** built with Python Flask that provi
 🔗 **Live Demo:** https://college-management-system-g3z2.onrender.com
 
 🔗 **GitHub Repository:** https://github.com/monikajaiswal22/college-management-system
-
 ---
 ## 📌 Project Overview 
 
@@ -14,7 +13,6 @@ The College Management System is a web-based application designed to simplify an
 It provides role-based access for administrators, teachers, and students, with features for student management, attendance, marks, fees, notices, and more.
 
 ---
-
 ## ✨ Features
 
 ### 👨‍💼 Admin Dashboard
