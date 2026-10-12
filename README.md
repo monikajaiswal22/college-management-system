@@ -131,7 +131,6 @@ Password: 1234
 * Mobile application
 
 ---
-
 ## 👩‍💻 Developer
 
 **Monika Jaiswal**
