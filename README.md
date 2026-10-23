@@ -5,6 +5,7 @@ A full-featured **College Management System** built with Python Flask that provi
 🔗 **Live Demo:** https://college-management-system-g3z2.onrender.com
 
 🔗 **GitHub Repository:** https://github.com/monikajaiswal22/college-management-system
+
 ---
 
 ## 📌 Project Overview 
